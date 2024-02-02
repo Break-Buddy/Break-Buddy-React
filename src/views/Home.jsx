@@ -1,7 +1,11 @@
+import LandingDisplay from "../components/LandingDisplay";
+
 function Home() {
-  return <div>
-    
-  </div>;
+  return (
+    <div>
+      <LandingDisplay />
+    </div>
+  );
 }
 
 export default Home;
