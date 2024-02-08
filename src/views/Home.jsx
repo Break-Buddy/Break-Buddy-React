@@ -7,7 +7,7 @@ function Home() {
     <div>
       <LandingDisplay />
       <HowItWorks />
-      <FAQ />
+      
     </div>
   );
 }
