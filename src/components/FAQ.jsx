@@ -46,7 +46,7 @@ function FAQ() {
   };
 
   return (
-    <div className="border flex justify-center py-12">
+    <div className="border flex justify-center py-12 ">
       <div className="flex flex-col items-center gap-6">
         <h2>FAQ</h2>
         <div className="flex flex-col gap-4">
