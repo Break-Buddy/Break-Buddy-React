@@ -59,7 +59,7 @@ function FAQ() {
               {expandedQuestions.includes(index) && <h3>{question.answer}</h3>}
               <div
                 onClick={() => handleClick(index)}
-                className="cursor-pointer absolute right-4"
+                className="cursor-pointer absolute right-4 top-3"
               >
                 <ExpandIcon />
               </div>
