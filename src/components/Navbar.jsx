@@ -8,9 +8,7 @@ function Navbar() {
       </div>
       <div className="flex gap-6 items-center">
         <h3 className="text-[#007DE2]">Sign In</h3>
-        <h3 className="border text-white px-4 py-2 rounded-[4px] bg-[#007DE2] hover:bg-[#00589E] cursor-pointer  transition-all duration-200">
-          Join for Free
-        </h3>
+        <h3 className="button-1 px-4 py-2">Join for Free</h3>
       </div>
     </div>
   );
