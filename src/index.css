@@ -26,7 +26,7 @@ h4 {
 }
 
 .button-1 {
-  @apply bg-[#007DE2] rounded text-white w-fit hover:bg-[#00589E] cursor-pointer  transition-all duration-150;
+  @apply bg-[#007DE2] rounded text-white w-fit hover:bg-[#00589E] cursor-pointer  transition-all duration-200;
 }
 
 .landingCaption {
