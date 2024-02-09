@@ -29,6 +29,14 @@ h4 {
   @apply bg-[#007DE2] rounded text-white w-fit hover:bg-[#00589E] cursor-pointer  transition-all duration-200;
 }
 
+.button-2 {
+  @apply border-2 text-[#007DE2] border-[#007DE2] rounded-md bg-white;
+}
+
+.button-3 {
+  @apply text-[#0D0F11] rounded-md bg-[#F3B734] font-medium
+}
+
 @font-face {
   font-family: "Manrope";
   src: local(Manrope-Regular),

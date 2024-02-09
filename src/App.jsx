@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import Home from "./views/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Dashboard from "./views/Dashboard";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Dashboard />} />
       </Routes>
       <Footer />
     </div>
