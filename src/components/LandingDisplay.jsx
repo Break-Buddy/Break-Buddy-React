@@ -4,13 +4,15 @@ import headerphotoo from "../assets/headerphotoo.svg";
 
 function LandingDisplay() {
   return (
-    <div className="md:px-16 pt-20 flex flex-col justify-center">
+    <div className="px-0 md:px-16 pt-20 flex flex-col justify-center">
       <div className="flex flex-col-reverse md:flex-row justify-center md:px-80 py-6 items-center gap-2">
         {/* LEFT SIDE */}
         <div className="flex flex-col gap-4 px-20 md:px-0 lg:w-1/2">
           <div className="flex flex-col justify-start gap-2">
-            <h1 className="text- font-bold">Reward yourself.</h1>
-            <h1 className="font-bold">Take a social break</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold">Reward yourself.</h1>
+            <h1 className="text-3xl lg:text-5xl font-bold">
+              Take a social break
+            </h1>
           </div>
           <h2 className="w-[420px]">
             Find an accountability buddy for taking that much needed break
