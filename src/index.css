@@ -2,26 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
+h1, h2, h3, h4 {
+    @apply  font-manrope
+}
+
 h1 {
-    @apply text-5xl 
+  @apply text-5xl;
 }
 
 h2 {
-    @apply text-2xl
+  @apply text-2xl;
 }
 
 h3 {
-    @apply text-base
+  @apply text-base;
 }
 
 h4 {
-    @apply text-xs
+  @apply text-xs;
 }
 
-.button-1{
-    @apply bg-[#007DE2] rounded text-white w-fit
+.button-1 {
+  @apply bg-[#007DE2] rounded text-white w-fit;
 }
 
 .landingCaption {
-    @apply p-3 text-xs rounded-full absolute z-30 bg-[#FFF]
+  @apply p-3 text-xs rounded-full absolute z-30 bg-[#FFF];
 }
+
+@font-face {
+  font-family: "Manrope";
+  src: local(Manrope-Regular),
+    url("/public/fonts/Manrope/Manrope-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: local(Manrope-Medium),
+    url("/public/fonts/Manrope/Manrope-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: local(Manrope-SemiBold),
+    url("/public/fonts/Manrope/Manrope-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: local(Manrope-Bold),
+    url("/public/fonts/Manrope/Manrope-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+}
+
