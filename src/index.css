@@ -29,10 +29,6 @@ h4 {
   @apply bg-[#007DE2] rounded text-white w-fit hover:bg-[#00589E] cursor-pointer  transition-all duration-200;
 }
 
-.landingCaption {
-  @apply p-3 text-xs rounded-full absolute z-30 bg-[#FFF];
-}
-
 @font-face {
   font-family: "Manrope";
   src: local(Manrope-Regular),
