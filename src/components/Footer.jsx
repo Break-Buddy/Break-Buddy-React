@@ -13,7 +13,7 @@ function Footer() {
     },
   ];
   return (
-    <div className="bg-[#003F71] px-9 py-8">
+    <div className="bg-[#003F71] md:px-48 py-8">
       <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-0">
         <img src={BBLogo2} alt="" />
         <div className="flex flex-col gap-6 text-white items-center md:items-start">
