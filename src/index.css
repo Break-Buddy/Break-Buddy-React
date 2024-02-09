@@ -34,7 +34,7 @@ h4 {
 }
 
 .button-3 {
-  @apply text-[#0D0F11] rounded-md bg-[#F3B734] font-medium
+  @apply text-[#0D0F11] rounded-md bg-[#F3B734] font-medium hover:bg-[#AA8024] 
 }
 
 @font-face {
