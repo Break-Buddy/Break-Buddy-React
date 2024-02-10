@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Upcoming from "../components/Upcoming";
+import SignInPage from "../components/SignInPage";
 
 function Dashboard() {
   const date = new Date();
@@ -76,6 +77,8 @@ function Dashboard() {
         </div>
         {/* END OF BOTTOM STUFF */}
         {/*  */}
+
+        <SignInPage/>
       </div>
     </div>
   );
