@@ -4,13 +4,8 @@ import { FacebookIcon, GoogleIcon, WindowsIcon } from "./Icons";
 
 function SignInPage() {
   return (
-    <header className="flex flex-col pb-10 text-base font-medium whitespace-nowrap bg-sky-900">
-      <div className="flex justify-center items-center px-16 py-3.5 w-full text-sky-600 bg-white leading-[119%] max-md:px-5 max-md:max-w-full">
-        <div className="flex gap-5 justify-between w-full max-w-[980px] max-md:flex-wrap max-md:max-w-full">
-        <div className="self-end p-3">Sign up</div>
-        </div>
-      </div>
-      <form className="flex flex-col items-center self-center p-11 mt-9 max-w-full text-black bg-white rounded-xl w-[527px] max-md:px-5">
+    <header className="flex flex-col pb-10 text-base">
+        <form className="flex flex-col items-center self-center p-11 mt-9 max-w-full text-black bg-white rounded-xl w-[527px] max-md:px-5">
         <h2 className="text-2xl leading-5">Sign in</h2>
         <label className="self-stretch mt-8 max-md:max-w-full">Email</label>
         <input
