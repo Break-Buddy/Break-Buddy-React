@@ -3,7 +3,7 @@ import { FacebookIcon, GoogleIcon, WindowsIcon } from "./Icons";
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, OAuthProvider } from "firebase/auth"; // Update import to include OAuthProvider
 import { auth } from "../config/firebase";
 
-function SignInPage() {
+function SignUpPage() {
   const handleGoogleSignUp = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -81,4 +81,4 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default SignUpPage;

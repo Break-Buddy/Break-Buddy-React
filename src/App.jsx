@@ -11,11 +11,12 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Dashboard />} />
-      </Routes>
+        <Route path="/home" element={<Dashboard />} /> {/* Route for Dashboard */}
+       </Routes>
       <Footer />
     </div>
   );
 }
 
 export default App;
+
