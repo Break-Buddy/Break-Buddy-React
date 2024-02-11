@@ -10,10 +10,12 @@ import SignUpPage from "./components/SignUpPage";
 function App() {
   const handleLogIn = () => {
     setIsLoginVisible(true);
+    setIsSignUpVisible(false);
   };
 
   const handleSignUp = () => {
     setIsSignUpVisible(true);
+    setIsLoginVisible(false);
   }
 
   const [isLoginVisible, setIsLoginVisible] = useState(false);
