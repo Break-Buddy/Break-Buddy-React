@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import Upcoming from "../components/Upcoming";
-import SignInPage from "../components/SignInPage";
-import ActivitiesDashboard from "../components/ActivitiesDashboard";
-import FiltersDashboard from "../components/FiltersDashboard";
-
 
 function Dashboard() {
   const date = new Date();
@@ -81,7 +77,6 @@ function Dashboard() {
         {/* END OF BOTTOM STUFF */}
         {/*  */}
 
-        <SignInPage/>
       </div>
     </div>
   );
