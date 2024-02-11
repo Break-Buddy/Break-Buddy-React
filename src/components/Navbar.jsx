@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="absolute flex justify-between items-center w-full py-3 px-12 xl:px-40 bg-white">
+    <div className="absolute flex justify-between items-center w-full py-3 px-5 md:px-12 xl:px-40 bg-white">
       <div>
         <Link to="/">
           <img src={BBLogo} className="w-28" alt="Break Buddy Logo" />
