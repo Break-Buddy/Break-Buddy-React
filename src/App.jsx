@@ -16,7 +16,12 @@ function App() {
   const handleSignUp = () => {
     setIsSignUpVisible(true);
     setIsLoginVisible(false);
-  }
+  };
+
+  // const handleCloseModal = () => {
+  //   setIsSignUpVisible(false);
+  //   setIsLoginVisible(false);
+  // };
 
   const [isLoginVisible, setIsLoginVisible] = useState(false);
   const [isSignUpVisible, setIsSignUpVisible] = useState(false);
@@ -24,7 +29,8 @@ function App() {
   // useEffect to handle overflow property
   useEffect(() => {
     // Update body overflow property when isLoginVisible changes
-    document.body.style.overflow = isLoginVisible || isSignUpVisible ? "hidden" : "auto";
+    document.body.style.overflow =
+      isLoginVisible || isSignUpVisible ? "hidden" : "auto";
 
     // Cleanup function to reset overflow property when component unmounts or isLoginVisible changes
     return () => {
@@ -38,12 +44,20 @@ function App() {
         <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-50 rounded-2xl">
           <SignInPage />
         </div>
-      ) : isSignUpVisible ? <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-50 rounded-2xl">
-      <SignUpPage />
-    </div> : null}
+      ) : isSignUpVisible ? (
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-50 rounded-2xl">
+          <SignUpPage />
+        </div>
+      ) : null}
 
-      <div className={`opacity-${isLoginVisible ? 30 : 100}`}>
-        <Navbar handleLogIn={handleLogIn} isLoginVisible={isLoginVisible} handleSignUp={handleSignUp} />
+      <div 
+        className={`opacity-${isLoginVisible || isSignUpVisible ? 30 : 100}`}
+      >
+        <Navbar
+          handleLogIn={handleLogIn}
+          isLoginVisible={isLoginVisible}
+          handleSignUp={handleSignUp}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Dashboard />} />

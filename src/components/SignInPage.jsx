@@ -56,25 +56,25 @@ function SignInPage() {
         </button>
         <div className="mt-7">Or</div>
         <div
-          className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5"
+          className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5 cursor-pointer"
           onClick={handleGoogleSignUp}
         >
           <GoogleIcon />
-          <div className="grow">Continue with Google</div>
+          <div>Continue with Google</div>
         </div>
         <div
-          className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5"
+          className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5 cursor-pointer"
           onClick={handleFacebookSignUp}
         >
           <FacebookIcon />
-          <div className="grow">Sign up with Facebook</div>
+          <div>Sign up with Facebook</div>
         </div>
         <div
-          className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5"
+          className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5 cursor-pointer"
           onClick={handleMicrosoftSignUp}
         >
           <WindowsIcon />
-          <div className="grow">Sign up with Microsoft</div>
+          <div>Sign up with Microsoft</div>
         </div>
       </form>
     </header>

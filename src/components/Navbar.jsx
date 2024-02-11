@@ -10,14 +10,18 @@ function Navbar({ handleLogIn, isLoginVisible, handleSignUp }) {
         </Link>
       </div>
 
-      {isLoginVisible ? ( <div>Sign Up</div>
-        
-      ) :<div className="flex gap-6 items-center">
-      <h3 onClick={handleLogIn} className="text-[#007DE2] cursor-pointer">
-        Sign In
-      </h3>
-      <h3 onClick={handleSignUp} className="button-1 px-4 py-2">Join for Free</h3>
-    </div> }
+      {isLoginVisible ? (
+        <div>Sign Up</div>
+      ) : (
+        <div className="flex gap-6 items-center">
+          <h3 onClick={handleLogIn} className="text-[#007DE2] cursor-pointer">
+            Sign In
+          </h3>
+          <h3 onClick={handleSignUp} className="button-1 px-4 py-2">
+            Join for Free
+          </h3>
+        </div>
+      )}
     </div>
   );
 }
