@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Upcoming from "../components/Upcoming";
 import SignInPage from "../components/SignInPage";
+import ActivitiesDashboard from "../components/ActivitiesDashboard";
 import FiltersDashboard from "../components/FiltersDashboard";
+
 
 function Dashboard() {
   const date = new Date();
@@ -72,9 +74,9 @@ function Dashboard() {
             <FiltersDashboard />
           </div>
           {/* END OF LEFT */}
-          {/* RIGHT */}
-          <div className="w-3/4 bg-white rounded">BREAKS HAPPENING SOON</div>
-          {/* END OF RIGHT */}
+          {/* Activities Dashboard */}
+          <ActivitiesDashboard />
+          {/* End of Activities Dashboard */}
         </div>
         {/* END OF BOTTOM STUFF */}
         {/*  */}
