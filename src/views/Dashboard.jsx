@@ -67,12 +67,12 @@ function Dashboard() {
           {/* LEFT */}
           <div className="w-1/4 flex flex-col gap-4">
             <Upcoming />
-            <div className="bg-white rounded">Filters</div>
+            <FiltersDashboard />
           </div>
           {/* END OF LEFT */}
-          {/* RIGHT */}
-          <div className="w-3/4 bg-white rounded">BREAKS HAPPENING SOON</div>
-          {/* END OF RIGHT */}
+          {/* Activities Dashboard */}
+          <ActivitiesDashboard />
+          {/* End of Activities Dashboard */}
         </div>
         {/* END OF BOTTOM STUFF */}
         {/*  */}
