@@ -35,9 +35,9 @@ function SignInPage() {
   };
 
   return (
-    <header className="flex flex-col pb-10 text-base">
-      <form className="flex flex-col items-center self-center p-11 mt-9 max-w-full text-black bg-white rounded-xl w-[527px] max-md:px-5">
-        <h2 className="text-2xl leading-5">Sign Up</h2>
+    <header className="flex flex-col bg-white border-2 rounded-md">
+        <form className="flex flex-col items-center self-center p-11 mt-9 max-w-full text-black bg-white rounded-xl w-[527px] max-md:px-5">
+        <h2 className="text-2xl leading-5">Sign in</h2>
         <label className="self-stretch mt-8 max-md:max-w-full">Email</label>
         <input
           type="email"
