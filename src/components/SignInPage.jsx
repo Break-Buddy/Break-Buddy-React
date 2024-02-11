@@ -52,7 +52,7 @@ function SignInPage() {
         />
         <br />
         <button className="button-1 px-4 py-2" type="submit">
-          Sign Up
+          Sign In
         </button>
         <div className="mt-7">Or</div>
         <div
