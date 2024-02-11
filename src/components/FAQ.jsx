@@ -10,7 +10,7 @@ const questions = [
   {
     question: "What kind of activities can I do?",
     answer:
-      "You can do all sorts of activities  as long as it abides by our community guidelines. Some recommended activities are going for a walk, meal prepping, eating lunch and making art. Choosing video and/or video will depend on your activity and comfort level.",
+      "You can do all sorts of activities  as long as it abides by our community guidelines. Some recommended activities are going for a walk, meal prepping, eating lunch and making art. Choosing video and/or audio will depend on your activity and comfort level.",
   },
   {
     question: "What happens if I miss a break?",
@@ -46,14 +46,14 @@ function FAQ() {
   };
 
   return (
-    <div className="flex justify-center py-12 ">
-      <div className="flex flex-col items-center gap-6">
+    <div className="flex justify-center py-12">
+      <div className="flex flex-col items-center gap-6 px-3">
         <h2>FAQ</h2>
         <div className="flex flex-col gap-4">
           {questions.map((question, index) => (
             <div
               key={index}
-              className="flex flex-col w-[400px] md:w-[600px] px-4 py-2 relative gap-3 bg-[#EBF6FF]"
+              className="flex flex-col w-[330px] md:w-[600px] px-4 py-2 relative gap-3 bg-[#EBF6FF]"
             >
               <h3>{question.question}</h3>
               {expandedQuestions.includes(index) && <h3>{question.answer}</h3>}
