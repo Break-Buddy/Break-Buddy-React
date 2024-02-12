@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CameraIcon from "../assets/CameraIcon.png";
 import { Link } from "react-router-dom";
 
-const AccountCreation = ({ handleCloseModal }) => {
+const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [timezone, setTimezone] = useState("");
@@ -12,6 +12,7 @@ const AccountCreation = ({ handleCloseModal }) => {
 
   const handleStoreInformation = () => {
     localStorage.setItem("firstName", firstName);
+    setIsCreateAccountVisible(false);
   };
 
   const handleFirstNameChange = (e) => {

@@ -61,7 +61,7 @@ function App() {
         </div>
       ) : isCreateAccountVisible ? (
         <div className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-50 rounded-2xl">
-          <AccountCreation handleCloseModal={handleCloseModal} />
+          <AccountCreation handleCloseModal={handleCloseModal} setIsCreateAccountVisible={setIsCreateAccountVisible} />
         </div>
       ) : null}
 
