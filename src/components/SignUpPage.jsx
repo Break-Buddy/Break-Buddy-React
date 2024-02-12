@@ -8,7 +8,7 @@ import {
 } from "firebase/auth"; // Update import to include OAuthProvider
 import { auth } from "../config/firebase";
 
-function SignUpPage() {
+function SignUpPage({ handleCloseModal, handleCreateAccount }) {
   const handleGoogleSignUp = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -41,7 +41,10 @@ function SignUpPage() {
 
   return (
     <header className="flex flex-col bg-white border-2 rounded-md relative">
-      <div className="absolute right-5 top-5 cursor-pointer">
+      <div
+        onClick={handleCloseModal}
+        className="absolute right-5 top-5 cursor-pointer"
+      >
         <CloseButton />
       </div>
       <form className="flex flex-col items-center self-center p-11 pb-5 mt-4 max-w-full text-black bg-white rounded-xl w-[527px] max-md:px-5">
@@ -71,7 +74,11 @@ function SignUpPage() {
           />
         </div>
         {/* END PASSWORD */}
-        <button className="button-1 px-4 py-2 mt-7" type="submit">
+        <button
+          onClick={handleCreateAccount}
+          className="button-1 px-4 py-2 mt-7"
+          type="submit"
+        >
           Sign Up
         </button>
         <div className="mt-7">Or</div>

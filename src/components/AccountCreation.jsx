@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import CameraIcon from "../assets/CameraIcon.png";
+import { Link } from "react-router-dom";
 
-const AccountCreation = () => {
+const AccountCreation = ({ handleCloseModal }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [timezone, setTimezone] = useState("");
   const [gender, setGender] = useState("");
   const [isOver18, setIsOver18] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
+
+  const handleStoreInformation = () => {
+    localStorage.setItem("firstName", firstName);
+  };
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -45,19 +50,16 @@ const AccountCreation = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center bg-white border-2 rounded-md w-[527px]">
       <div className="flex flex-col items-center justify-center gap-4 p-4 bg-white rounded-lg">
-        <div className="w-20 p-6 bg-[#D0D5DD] h-20 rounded-full">
-          <img classname className="w-full" src={CameraIcon} />
-        </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full cursor-pointer">
+            <img classname className="w-full" src={CameraIcon} />
+          </div>
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex gap-8">
               <div className="flex flex-col items-start">
-                <label
-                  htmlFor="firstName"
-                  className="text-black font-semibold mb-1"
-                >
+                <label htmlFor="firstName" className="text-black mb-1">
                   First Name
                 </label>
                 <input
@@ -65,14 +67,11 @@ const AccountCreation = () => {
                   type="text"
                   value={firstName}
                   onChange={handleFirstNameChange}
-                  className="input-field bg-transparent border border-solid border-[#000000] rounded-[8px] w-[201px] h-[40px] pl-2"
+                  className="rounded-md h-[40px] pl-2 bg-white border focus:bg-[#F2F2F2] focus:outline-none"
                 />
               </div>
               <div className="flex flex-col items-start">
-                <label
-                  htmlFor="lastName"
-                  className="text-black font-semibold mb-1"
-                >
+                <label htmlFor="lastName" className="text-black mb-1">
                   Last Name
                 </label>
                 <input
@@ -80,13 +79,13 @@ const AccountCreation = () => {
                   type="text"
                   value={lastName}
                   onChange={handleLastNameChange}
-                  className="input-field bg-transparent border border-solid border-[#000000] rounded-[8px] w-[201px] h-[40px] pl-2"
+                  className="rounded-md h-[40px] pl-2 bg-white border focus:bg-[#F2F2F2] focus:outline-none"
                 />
               </div>
             </div>
           </div>
           <div className="flex flex-col items-start pt-4">
-            <label htmlFor="timezone" className="text-black font-semibold mb-1">
+            <label htmlFor="timezone" className="text-black mb-1">
               Timezone
             </label>
             <input
@@ -94,18 +93,18 @@ const AccountCreation = () => {
               type="text"
               value={timezone}
               onChange={handleTimezoneChange}
-              className="input-field bg-transparent border border-solid border-[#000000] rounded-[8px] w-full h-[40px] pl-2"
+              className="border w-full h-[40px] pl-2 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"
             />
           </div>
           <div className="flex flex-col items-start pt-4">
-            <label htmlFor="gender" className="text-black font-semibold mb-1">
+            <label htmlFor="gender" className="text-black mb-1">
               Gender
             </label>
             <select
               id="gender"
               value={gender}
               onChange={handleGenderChange}
-              className="select-field bg-transparent border border-solid border-[#000000] rounded-[8px] w-[201px] h-[40px] pl-2"
+              className="select-field bg-transparent border rounded-md h-[40px] pl-2 bg-white focus:bg-[#F2F2F2] focus:outline-none pr-2"
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -114,34 +113,36 @@ const AccountCreation = () => {
             </select>
           </div>
           <div>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={isOver18}
-                onChange={handleIsOver18Change}
-                className="checkbox-field mr-2"
-              />
-              <span className="text-black">I am over 18 years old</span>
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={agreeTerms}
-                onChange={handleAgreeTermsChange}
-                className="checkbox-field mr-2"
-              />
-              <span className="text-black">
-                I have read Break Buddy's Terms and Privacy Policy
-              </span>
-            </label>
+            <div className="pl-5">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={isOver18}
+                  onChange={handleIsOver18Change}
+                  className="mr-2"
+                />
+                <span className="text-black">I am over 18 years old</span>
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={agreeTerms}
+                  onChange={handleAgreeTermsChange}
+                  className="mr-2"
+                />
+                <span className="text-black">
+                  I have read Break Buddy's{" "}
+                  <span className="text-[#007DE2]">Terms</span> and{" "}
+                  <span className="text-[#007DE2]">Privacy Policy</span>
+                </span>
+              </label>
+            </div>
           </div>
-          <button
-            type="submit"
-            className="button-3 py-3 px-3 w-40 mx-auto"
-            disabled
-          >
-            Submit
-          </button>
+          <Link onClick={handleStoreInformation} to="/home" className="mx-auto">
+            <button type="submit" className="button-3 py-3 px-3 w-40 my-5 ">
+              Create Account
+            </button>
+          </Link>
         </form>
       </div>
     </div>

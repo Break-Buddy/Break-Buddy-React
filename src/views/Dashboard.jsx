@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Upcoming from "../components/Upcoming";
+import FiltersDashboard from "../components/FiltersDashboard";
+import ActivitiesDashboard from "../components/ActivitiesDashboard";
 
 function Dashboard() {
+
+  const fName = localStorage.getItem("firstName");
+
   const date = new Date();
   const month = (date.getMonth() + 1).toLocaleString("en-US", {
     minimumIntegerDigits: 2,
@@ -38,7 +43,7 @@ function Dashboard() {
           <div className="flex justify-between items-center">
             {/* Name and Date */}
             <div className="flex flex-col gap-1 text-white">
-              <h2 className="text-[32px]">Welcome Tara!</h2>
+              <h2 className="text-[32px]">Welcome {fName}!</h2>
               <div className="flex gap-6">
                 <h3>
                   Date: {month}/{day}/{year}
