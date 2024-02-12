@@ -102,7 +102,7 @@ function SignInPage() {
         </div>
       </form>
       <div className="flex gap-2 justify-center mt-3 mb-12">
-        <h3>Dont' have an account?</h3>
+        <h3>Don't have an account?</h3>
         <h3 className="text-[#007DE2] underline cursor-pointer">Sign Up</h3>
       </div>
     </header>
