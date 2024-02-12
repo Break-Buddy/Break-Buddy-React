@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import Upcoming from "../components/Upcoming";
 import FiltersDashboard from "../components/FiltersDashboard";
 import ActivitiesDashboard from "../components/ActivitiesDashboard";
+import BreakCreation from "../components/BreakCreation";
+import BreakCreationConfirmation from "../components/BreakCreationConfirmation";
 
 function Dashboard() {
+  const [isPostBreakVisible, setIsPostBreakVisible] = useState(false);
+  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
+
+  const handlePostBreak = () => {
+    setIsPostBreakVisible(true);
+  };
 
   const fName = localStorage.getItem("firstName");
 
@@ -37,6 +45,19 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen pt-28 bg-[#003F71] px-9">
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center">
+        {isPostBreakVisible ? (
+          <BreakCreation
+            setIsPostBreakVisible={setIsPostBreakVisible}
+            setIsConfirmationVisible={setIsConfirmationVisible}
+          />
+        ) : isConfirmationVisible ? (
+          <BreakCreationConfirmation
+            setIsPostBreakVisible={setIsPostBreakVisible}
+            setIsConfirmationVisible={setIsConfirmationVisible}
+          />
+        ) : null}
+      </div>
       <div className="flex flex-col gap-5">
         <div>
           {/* TOP MESSAGE */}
@@ -59,7 +80,9 @@ function Dashboard() {
               <button onClick={handleClickDay} className="button-2 px-6 py-2">
                 {toggleDay}
               </button>
-              <button className="button-3 px-6 py-2">+ POST A BREAK</button>
+              <button onClick={handlePostBreak} className="button-3 px-6 py-2">
+                + POST A BREAK
+              </button>
             </div>
             {/* End of Buttons */}
           </div>
@@ -81,7 +104,6 @@ function Dashboard() {
         </div>
         {/* END OF BOTTOM STUFF */}
         {/*  */}
-
       </div>
     </div>
   );
