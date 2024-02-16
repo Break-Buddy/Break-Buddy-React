@@ -74,6 +74,18 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
           />
         </div>
         {/* END PASSWORD */}
+        {/* CONFIRM PASSWORD */}
+        <div className="flex flex-col w-full">
+          <label className="self-stretch mt-9 max-md:max-w-full font-medium">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
+            aria-label="password-input"
+          />
+        </div>
+        {/* END CONFIRM PASSWORD */}
         <button
           onClick={handleCreateAccount}
           className="button-1 px-4 py-2 mt-7"
