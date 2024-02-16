@@ -106,7 +106,7 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
       </form>
       <div className="flex gap-2 justify-center mt-3 mb-12">
         <h3>Already have an account?</h3>
-        <h3 className="text-[#007DE2] underline cursor-pointer">Sign In</h3>
+        <h3 className="text-[#007DE2] underline cursor-pointer">Log In</h3>
       </div>
     </header>
   );

@@ -51,7 +51,7 @@ function SignInPage({ handleCloseModal }) {
         {/* EMAIL */}
         <div className="flex flex-col w-full">
           <h2 className="text-2xl leading-5 font-medium self-center">
-            Sign in
+            Log in
           </h2>
           <label className="self-stretch mt-8 max-md:max-w-full font-medium">
             Email
@@ -79,7 +79,7 @@ function SignInPage({ handleCloseModal }) {
         </div>
 
         <button className="button-1 px-4 py-2 mt-3" type="submit">
-          Sign In
+          Log In
         </button>
         <div className="mt-7">Or</div>
         <div
