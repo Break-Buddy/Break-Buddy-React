@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
+  CapslockOnIcon,
   CloseButton,
   FacebookIcon,
   GoogleIcon,
@@ -18,6 +19,21 @@ import { auth } from "../config/firebase";
 function SignUpPage({ handleCloseModal, handleCreateAccount }) {
   // For show password icon
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isCapslockOn, setIsCapslockOn] = useState(false);
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      const capsLockEnabled =
+        event.getModifierState && event.getModifierState("CapsLock");
+      setIsCapslockOn(capsLockEnabled);
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   const handleGoogleSignUp = async () => {
     try {
@@ -92,6 +108,12 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
               <PasswordInvisibleIcon />
             )}
           </div>
+          <div
+            onClick={() => setIsCapslockOn(!isCapslockOn)}
+            className="absolute bottom-[8px] right-14"
+          >
+            {isCapslockOn && <CapslockOnIcon />}
+          </div>
         </div>
         {/* END PASSWORD */}
         {/* CONFIRM PASSWORD */}
@@ -113,6 +135,12 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
             ) : (
               <PasswordInvisibleIcon />
             )}
+          </div>
+          <div
+            onClick={() => setIsCapslockOn(!isCapslockOn)}
+            className="absolute bottom-[8px] right-14"
+          >
+            {isCapslockOn && <CapslockOnIcon />}
           </div>
         </div>
         {/* END CONFIRM PASSWORD */}
