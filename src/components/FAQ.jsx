@@ -51,14 +51,18 @@ function FAQ() {
         <h2>FAQ</h2>
         <div className="flex flex-col gap-4">
           {questions.map((question, index) => (
-            <div
-              key={index}
-              className="flex flex-col w-[330px] md:w-[600px] px-4 py-2 relative gap-3 bg-[#EBF6FF]"
-            >
+                <div
+                key={index}
+                className={`flex flex-col w-[330px] md:w-[600px] px-4 py-2 relative gap-3 bg-[#EBF6FF] ${
+                  expandedQuestions.includes(index) ? 'font-bold' : ''
+                }`}
+              >
               <h3>{question.question}</h3>
-              {expandedQuestions.includes(index) && <h3>{question.answer}</h3>}
+              {expandedQuestions.includes(index) && <h3 className="font-normal">{question.answer}</h3>}
               <div
-                onClick={() => handleClick(index)}
+                onClick={() => {
+                  handleClick(index);
+                }}
                 className="cursor-pointer absolute right-4 top-3"
               >
                 <ExpandIcon />
