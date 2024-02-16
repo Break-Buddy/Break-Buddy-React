@@ -1,5 +1,12 @@
-import React from "react";
-import { CloseButton, FacebookIcon, GoogleIcon, WindowsIcon } from "./Icons";
+import React, { useState } from "react";
+import {
+  CloseButton,
+  FacebookIcon,
+  GoogleIcon,
+  PasswordInvisibleIcon,
+  PasswordVisibleIcon,
+  WindowsIcon,
+} from "./Icons";
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -9,6 +16,9 @@ import {
 import { auth } from "../config/firebase";
 
 function SignUpPage({ handleCloseModal, handleCreateAccount }) {
+  // For show password icon
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const handleGoogleSignUp = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -63,27 +73,47 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
         </div>
         {/* END EMAIL */}
         {/* PASSWORD */}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full relative">
           <label className="self-stretch mt-9 max-md:max-w-full font-medium">
             Password
           </label>
           <input
-            type="password"
+            type={isPasswordVisible ? "text" : "password"}
             className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
             aria-label="password-input"
           />
+          <div
+            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+            className="absolute bottom-[9px] right-6 cursor-pointer"
+          >
+            {isPasswordVisible ? (
+              <PasswordVisibleIcon />
+            ) : (
+              <PasswordInvisibleIcon />
+            )}
+          </div>
         </div>
         {/* END PASSWORD */}
         {/* CONFIRM PASSWORD */}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full relative">
           <label className="self-stretch mt-9 max-md:max-w-full font-medium">
             Confirm Password
           </label>
           <input
-            type="password"
-            className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
+            type={isPasswordVisible ? "text" : "password"}
+            className="pl-3 pr-14 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
             aria-label="password-input"
           />
+          <div
+            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+            className="absolute bottom-[9px] right-6 cursor-pointer"
+          >
+            {isPasswordVisible ? (
+              <PasswordVisibleIcon />
+            ) : (
+              <PasswordInvisibleIcon />
+            )}
+          </div>
         </div>
         {/* END CONFIRM PASSWORD */}
         <button
