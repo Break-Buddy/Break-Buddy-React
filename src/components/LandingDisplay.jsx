@@ -5,7 +5,7 @@ import headerphotoo from "../assets/headerphotoo.svg";
 function LandingDisplay() {
   return (
     <div className="px-5 md:px-16 pt-20 flex flex-col justify-center items-center">
-      <div className="flex flex-col-reverse md:flex-row justify-center md:px-80 py-6 md:items-center gap-2">
+      <div className="flex flex-col-reverse md:flex-row justify-center md:px-80 py-6 md:items-center gap-40">
         {/* LEFT SIDE */}
         <div className="flex flex-col gap-4 px-14 md:px-0 lg:w-1/2">
           <div className="flex flex-col justify-start gap-2">
