@@ -1,6 +1,19 @@
 import React, { useState } from "react";
 
 function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
+  const [selectActivity, setSelectActivity] = useState(null);
+  const [selectPostPrivacy, setSelectPostPrivacy] = useState(null);
+
+  // Function to determine which button is selected
+  const handleSelectActivity = (option) => {
+    setSelectActivity(option);
+  };
+
+  // Function to determine which button is selected
+  const handleSelectPrivacy = (option) => {
+    setSelectPostPrivacy(option);
+  };
+
   const handleShowPostBreakConfirmation = () => {
     setIsPostBreakVisible(false);
     setIsConfirmationVisible(true);
@@ -61,13 +74,34 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
         <div className="flex flex-col gap-3">
           <h3>Activity Type</h3>
           <div className="flex gap-6">
-            <button className="text-[#007DE2] border border-[#007DE2] rounded px-3 py-1">
+            <button
+              onClick={() => handleSelectActivity("option1")}
+              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                selectActivity === "option1"
+                  ? "bg-[#007DE2] text-white"
+                  : "bg-white"
+              }`}
+            >
               Just Chat
             </button>
-            <button className="text-[#007DE2] border border-[#007DE2] rounded px-3 py-1">
+            <button
+              onClick={() => handleSelectActivity("option2")}
+              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                selectActivity === "option2"
+                  ? "bg-[#007DE2] text-white"
+                  : "bg-white"
+              }`}
+            >
               At Home
             </button>
-            <button className="text-[#007DE2] border border-[#007DE2] rounded px-3 py-1">
+            <button
+              onClick={() => handleSelectActivity("option3")}
+              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                selectActivity === "option3"
+                  ? "bg-[#007DE2] text-white"
+                  : "bg-white"
+              }`}
+            >
               Outdoors
             </button>
           </div>
@@ -86,13 +120,34 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
         <div className="flex flex-col gap-3">
           <h3>Post to</h3>
           <div className="flex gap-6">
-            <button className="text-[#007DE2] border border-[#007DE2] rounded px-3 py-1">
+            <button
+              onClick={() => handleSelectPrivacy("option1")}
+              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                selectPostPrivacy === "option1"
+                  ? "bg-[#007DE2] text-white"
+                  : "bg-white"
+              }`}
+            >
               All
             </button>
-            <button className="text-[#007DE2] border border-[#007DE2] rounded px-3 py-1">
+            <button
+              onClick={() => handleSelectPrivacy("option2")}
+              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                selectPostPrivacy === "option2"
+                  ? "bg-[#007DE2] text-white"
+                  : "bg-white"
+              }`}
+            >
               Public
             </button>
-            <button className="text-[#007DE2] border border-[#007DE2] rounded px-3 py-1">
+            <button
+              onClick={() => handleSelectPrivacy("option3")}
+              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                selectPostPrivacy === "option3"
+                  ? "bg-[#007DE2] text-white"
+                  : "bg-white"
+              }`}
+            >
               Private
             </button>
           </div>

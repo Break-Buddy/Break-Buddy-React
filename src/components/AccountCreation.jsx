@@ -108,8 +108,8 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
               className="select-field bg-transparent border rounded-md h-[40px] pl-2 bg-white focus:bg-[#F2F2F2] focus:outline-none pr-2"
             >
               <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="male">Man</option>
+              <option value="female">Woman</option>
               <option value="other">Other</option>
             </select>
           </div>

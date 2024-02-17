@@ -1,5 +1,15 @@
-import React, { useState } from "react";
-import { CloseButton, FacebookIcon, GoogleIcon, WindowsIcon } from "./Icons";
+
+import React, { useState, useEffect } from "react";
+import {
+  CapslockOnIcon,
+  CloseButton,
+  FacebookIcon,
+  GoogleIcon,
+  PasswordInvisibleIcon,
+  PasswordVisibleIcon,
+  WindowsIcon,
+} from "./Icons";
+
 import {
   updateProfile,
   createUserWithEmailAndPassword,
@@ -11,8 +21,26 @@ import {
 import { auth } from "../config/firebase";
 
 function SignUpPage({ handleCloseModal, handleCreateAccount }) {
-  // For Signing up via email
+
+  // For show password icon
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isCapslockOn, setIsCapslockOn] = useState(false);
+    // For Signing up via email
   const [userCredentials, setUserCredentials] = useState({});
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      const capsLockEnabled =
+        event.getModifierState && event.getModifierState("CapsLock");
+      setIsCapslockOn(capsLockEnabled);
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   // Function to change input value from signup form
   const handleCredentials = (e) => {
@@ -98,21 +126,65 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
         </div>
         {/* END EMAIL */}
         {/* PASSWORD */}
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full relative">
           <label className="self-stretch mt-9 max-md:max-w-full font-medium">
             Password
           </label>
           <input
+            type={isPasswordVisible ? "text" : "password"}
             onChange={(e) => {
               handleCredentials(e);
             }}
-            type="password"
             name="password"
             className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
             aria-label="password-input"
           />
+          <div
+            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+            className="absolute bottom-[9px] right-6 cursor-pointer"
+          >
+            {isPasswordVisible ? (
+              <PasswordVisibleIcon />
+            ) : (
+              <PasswordInvisibleIcon />
+            )}
+          </div>
+          <div
+            onClick={() => setIsCapslockOn(!isCapslockOn)}
+            className="absolute bottom-[8px] right-14"
+          >
+            {isCapslockOn && <CapslockOnIcon />}
+          </div>
         </div>
         {/* END PASSWORD */}
+        {/* CONFIRM PASSWORD */}
+        <div className="flex flex-col w-full relative">
+          <label className="self-stretch mt-9 max-md:max-w-full font-medium">
+            Confirm Password
+          </label>
+          <input
+            type={isPasswordVisible ? "text" : "password"}
+            className="pl-3 pr-14 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
+            aria-label="password-input"
+          />
+          <div
+            onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+            className="absolute bottom-[9px] right-6 cursor-pointer"
+          >
+            {isPasswordVisible ? (
+              <PasswordVisibleIcon />
+            ) : (
+              <PasswordInvisibleIcon />
+            )}
+          </div>
+          <div
+            onClick={() => setIsCapslockOn(!isCapslockOn)}
+            className="absolute bottom-[8px] right-14"
+          >
+            {isCapslockOn && <CapslockOnIcon />}
+          </div>
+        </div>
+        {/* END CONFIRM PASSWORD */}
         <button
           onClick={(e) => {
             handleSignup(e);
@@ -147,7 +219,7 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
       </form>
       <div className="flex gap-2 justify-center mt-3 mb-12">
         <h3>Already have an account?</h3>
-        <h3 className="text-[#007DE2] underline cursor-pointer">Sign In</h3>
+        <h3 className="text-[#007DE2] underline cursor-pointer">Log In</h3>
       </div>
     </header>
   );
