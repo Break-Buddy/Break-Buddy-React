@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import {
   CapslockOnIcon,
@@ -8,7 +9,10 @@ import {
   PasswordVisibleIcon,
   WindowsIcon,
 } from "./Icons";
+
 import {
+  updateProfile,
+  createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -17,9 +21,12 @@ import {
 import { auth } from "../config/firebase";
 
 function SignUpPage({ handleCloseModal, handleCreateAccount }) {
+
   // For show password icon
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCapslockOn, setIsCapslockOn] = useState(false);
+    // For Signing up via email
+  const [userCredentials, setUserCredentials] = useState({});
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -34,6 +41,32 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, []);
+
+  // Function to change input value from signup form
+  const handleCredentials = (e) => {
+    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+    console.log(userCredentials);
+  };
+
+  // Function to sign up using email to Firebase
+  const handleSignup = (e) => {
+    e.preventDefault();
+
+    createUserWithEmailAndPassword(
+      auth,
+      userCredentials.email,
+      userCredentials.password
+    )
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user.displayName);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        const errorCode = error.code;
+        console.log(errorCode, errorMessage);
+      });
+  };
 
   const handleGoogleSignUp = async () => {
     try {
@@ -83,7 +116,11 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
             Email
           </label>
           <input
+            onChange={(e) => {
+              handleCredentials(e);
+            }}
             type="email"
+            name="email"
             className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl h-[42px] focus:outline-none max-md:max-w-full bg-[#F2F2F2] focus:bg-[#F2F2F2]"
           />
         </div>
@@ -95,6 +132,10 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
           </label>
           <input
             type={isPasswordVisible ? "text" : "password"}
+            onChange={(e) => {
+              handleCredentials(e);
+            }}
+            name="password"
             className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
             aria-label="password-input"
           />
@@ -145,7 +186,9 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
         </div>
         {/* END CONFIRM PASSWORD */}
         <button
-          onClick={handleCreateAccount}
+          onClick={(e) => {
+            handleSignup(e);
+          }}
           className="button-1 px-4 py-2 mt-7"
           type="submit"
         >

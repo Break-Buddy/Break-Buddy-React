@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { CloseButton, FacebookIcon, GoogleIcon, WindowsIcon } from "./Icons";
 import {
+  signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
@@ -9,6 +10,38 @@ import {
 import { auth } from "../config/firebase";
 
 function SignInPage({ handleCloseModal }) {
+  // User email and password
+  const [loginCredentials, setLoginCredentials] = useState({});
+
+  const handleLoginCredentials = (e) => {
+    setLoginCredentials({
+      ...loginCredentials,
+      [e.target.name]: e.target.value,
+    });
+    console.log(loginCredentials);
+  };
+
+  // Function to login user with email and password
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Initialize signInWithEmailAndPassword function
+    signInWithEmailAndPassword(
+      auth,
+      loginCredentials.email,
+      loginCredentials.password
+    )
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        console.log("user signed up");
+      })
+      .catch((err) => {
+        const errorMessage = err.message;
+        const errorCode = err.code;
+        console.log(errorMessage);
+      });
+  };
+
   const handleGoogleSignUp = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -57,6 +90,10 @@ function SignInPage({ handleCloseModal }) {
             Email
           </label>
           <input
+            onChange={(e) => {
+              handleLoginCredentials(e);
+            }}
+            name="email"
             type="email"
             className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl h-[42px] focus:outline-none max-md:max-w-full bg-[#F2F2F2] focus:bg-[#F2F2F2]"
           />
@@ -68,6 +105,10 @@ function SignInPage({ handleCloseModal }) {
             Password
           </label>
           <input
+            onChange={(e) => {
+              handleLoginCredentials(e);
+            }}
+            name="password"
             type="password"
             className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
             aria-label="password-input"
