@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CloseButton, FacebookIcon, GoogleIcon, WindowsIcon } from "./Icons";
 import {
   signInWithEmailAndPassword,
@@ -9,16 +10,17 @@ import {
 } from "firebase/auth"; // Update import to include OAuthProvider
 import { auth } from "../config/firebase";
 
-function SignInPage({ handleCloseModal }) {
+function SignInPage({ handleCloseModal, setIsLoginVisible }) {
   // User email and password
   const [loginCredentials, setLoginCredentials] = useState({});
+  const navigate = useNavigate();
 
   const handleLoginCredentials = (e) => {
     setLoginCredentials({
       ...loginCredentials,
       [e.target.name]: e.target.value,
     });
-    console.log(loginCredentials);
+    // console.log(loginCredentials);
   };
 
   // Function to login user with email and password
@@ -34,6 +36,11 @@ function SignInPage({ handleCloseModal }) {
         const user = res.user;
         console.log(user);
         console.log("user signed up");
+        setIsLoginVisible(false);
+        if (auth.currentUser) {
+          // Redirect to "/home"
+          navigate("/home");
+        }
       })
       .catch((err) => {
         const errorMessage = err.message;
@@ -41,7 +48,7 @@ function SignInPage({ handleCloseModal }) {
         console.log(errorMessage);
       });
   };
-
+  console.log(auth.currentUser);
   const handleGoogleSignUp = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -83,9 +90,7 @@ function SignInPage({ handleCloseModal }) {
       <form className="flex flex-col items-center self-center p-11 pb-5 mt-4 max-w-full text-black bg-white rounded-xl w-[527px] max-md:px-5">
         {/* EMAIL */}
         <div className="flex flex-col w-full">
-          <h2 className="text-2xl leading-5 font-medium self-center">
-            Log in
-          </h2>
+          <h2 className="text-2xl leading-5 font-medium self-center">Log in</h2>
           <label className="self-stretch mt-8 max-md:max-w-full font-medium">
             Email
           </label>
@@ -119,7 +124,11 @@ function SignInPage({ handleCloseModal }) {
           <a href="#">forgot password</a>
         </div>
 
-        <button className="button-1 px-4 py-2 mt-3" type="submit">
+        <button
+          className="button-1 px-4 py-2 mt-3"
+          type="submit"
+          onClick={(e) => handleLogin(e)}
+        >
           Log In
         </button>
         <div className="mt-7">Or</div>

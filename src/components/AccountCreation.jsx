@@ -55,7 +55,7 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
       <div className="flex flex-col items-center justify-center gap-4 p-4 bg-white rounded-lg">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full cursor-pointer">
-            <img classname className="w-full" src={CameraIcon} />
+            <img className="w-full" src={CameraIcon} />
           </div>
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex gap-8">
