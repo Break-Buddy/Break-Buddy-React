@@ -9,6 +9,7 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
   const [gender, setGender] = useState("");
   const [isOver18, setIsOver18] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const [bio, setBio] = useState(""); // Added state for bio field
 
   const handleStoreInformation = () => {
     localStorage.setItem("firstName", firstName);
@@ -39,6 +40,10 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
     setAgreeTerms(e.target.checked);
   };
 
+  const handleBioChange = (e) => {
+    setBio(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here you can submit the form data to your backend or perform any other actions
@@ -48,6 +53,7 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
     console.log("Gender:", gender);
     console.log("Is Over 18:", isOver18);
     console.log("Agree Terms:", agreeTerms);
+    console.log("Bio:", bio); // Log the bio field value
   };
 
   return (
@@ -55,7 +61,7 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
       <div className="flex flex-col items-center justify-center gap-4 p-4 bg-white rounded-lg">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full cursor-pointer">
-            <img className="w-full" src={CameraIcon} />
+            <img className="w-full" src={CameraIcon} alt="Camera Icon" />
           </div>
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex gap-8">
@@ -113,31 +119,41 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
               <option value="other">Other</option>
             </select>
           </div>
-          <div>
-            <div className="pl-5">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={isOver18}
-                  onChange={handleIsOver18Change}
-                  className="mr-2"
-                />
-                <span className="text-black">I am over 18 years old</span>
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  checked={agreeTerms}
-                  onChange={handleAgreeTermsChange}
-                  className="mr-2"
-                />
-                <span className="text-black">
-                  I have read Break Buddy's{" "}
-                  <span className="text-[#007DE2]">Terms</span> and{" "}
-                  <span className="text-[#007DE2]">Privacy Policy</span>
-                </span>
-              </label>
-            </div>
+            <div className="flex flex-col items-start pt-4">
+            <label htmlFor="bio" className="text-black mb-1">
+              Bio (optional)
+            </label>
+            <input
+              id="bio"
+              type="text"
+              value={bio}
+              onChange={handleBioChange}
+              className="border w-full h-[40px] pl-2 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"
+            />
+          </div>
+          <div className="pl-5">
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={isOver18}
+                onChange={handleIsOver18Change}
+                className="mr-2"
+              />
+              <span className="text-black">I am over 18 years old</span>
+            </label>
+            <label className="flex items-center">
+              <input
+                type="checkbox"
+                checked={agreeTerms}
+                onChange={handleAgreeTermsChange}
+                className="mr-2"
+              />
+              <span className="text-black">
+                I have read Break Buddy's{" "}
+                <span className="text-[#007DE2]">Terms</span> and{" "}
+                <span className="text-[#007DE2]">Privacy Policy</span>
+              </span>
+            </label>
           </div>
           <Link onClick={handleStoreInformation} to="/home" className="mx-auto">
             <button type="submit" className="button-3 py-3 px-3 w-40 my-5 ">
@@ -151,3 +167,4 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
 };
 
 export default AccountCreation;
+
