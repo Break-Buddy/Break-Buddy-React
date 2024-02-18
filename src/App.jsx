@@ -7,6 +7,7 @@ import Dashboard from "./views/Dashboard";
 import SignInPage from "./components/SignInPage";
 import SignUpPage from "./components/SignUpPage";
 import AccountCreation from "./components/AccountCreation";
+import { auth } from "./config/firebase";
 
 function App() {
   const handleLogIn = () => {
@@ -22,7 +23,7 @@ function App() {
   const handleCloseModal = () => {
     setIsSignUpVisible(false);
     setIsLoginVisible(false);
-    setIsCreateAccountVisible(false); 
+    setIsCreateAccountVisible(false);
   };
 
   const handleCreateAccount = () => {
@@ -34,11 +35,22 @@ function App() {
   const [isSignUpVisible, setIsSignUpVisible] = useState(false);
   const [isCreateAccountVisible, setIsCreateAccountVisible] = useState(false);
 
+  const isUserAuthenticated = auth.currentUser;
+  console.log(isUserAuthenticated);
+
+  // Function to check if the user is logged in
+  const handleUserLoggedIn = (e) => {
+    e.preventDefault();
+    console.log(auth);
+  };
+
   // useEffect to handle overflow property
   useEffect(() => {
     // Update body overflow property when isLoginVisible changes
     document.body.style.overflow =
-      isLoginVisible || isSignUpVisible || isCreateAccountVisible ? "hidden" : "auto";
+      isLoginVisible || isSignUpVisible || isCreateAccountVisible
+        ? "hidden"
+        : "auto";
 
     // Cleanup function to reset overflow property when component unmounts or isLoginVisible changes
     return () => {
@@ -50,29 +62,34 @@ function App() {
     <div className="overflow-hidden">
       {isLoginVisible ? (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 rounded-2xl">
-          <SignInPage handleCloseModal={handleCloseModal} />
+          <SignInPage
+            handleCloseModal={handleCloseModal}
+            setIsLoginVisible={setIsLoginVisible}
+          />
         </div>
       ) : isSignUpVisible ? (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 rounded-2xl">
           <SignUpPage
             handleCloseModal={handleCloseModal}
             handleCreateAccount={handleCreateAccount}
+            setIsSignUpVisible={setIsSignUpVisible}
           />
         </div>
       ) : isCreateAccountVisible ? (
         <div className="absolute top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 z-50 rounded-2xl">
-          <AccountCreation handleCloseModal={handleCloseModal} setIsCreateAccountVisible={setIsCreateAccountVisible} />
+          <AccountCreation
+            handleCloseModal={handleCloseModal}
+            setIsCreateAccountVisible={setIsCreateAccountVisible}
+          />
         </div>
       ) : null}
 
       <div
-        className={`opacity-${isLoginVisible || isSignUpVisible || isCreateAccountVisible ? 30 : 100}`}
+        className={`opacity-${
+          isLoginVisible || isSignUpVisible || isCreateAccountVisible ? 30 : 100
+        }`}
       >
-        <Navbar
-          handleLogIn={handleLogIn}
-          isLoginVisible={isLoginVisible}
-          handleSignUp={handleSignUp}
-        />
+        <Navbar handleLogIn={handleLogIn} handleSignUp={handleSignUp} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Dashboard />} />

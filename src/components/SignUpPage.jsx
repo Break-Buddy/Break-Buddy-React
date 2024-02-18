@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   CapslockOnIcon,
@@ -20,12 +19,15 @@ import {
 } from "firebase/auth"; // Update import to include OAuthProvider
 import { auth } from "../config/firebase";
 
-function SignUpPage({ handleCloseModal, handleCreateAccount }) {
-
+function SignUpPage({
+  handleCloseModal,
+  setIsCreateAccountVisible,
+  setIsSignUpVisible,
+}) {
   // For show password icon
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCapslockOn, setIsCapslockOn] = useState(false);
-    // For Signing up via email
+  // For Signing up via email
   const [userCredentials, setUserCredentials] = useState({});
 
   useEffect(() => {
@@ -45,7 +47,7 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
   // Function to change input value from signup form
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-    console.log(userCredentials);
+    // console.log(userCredentials);
   };
 
   // Function to sign up using email to Firebase
@@ -60,6 +62,8 @@ function SignUpPage({ handleCloseModal, handleCreateAccount }) {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user.displayName);
+        setIsSignUpVisible(false);
+        setIsCreateAccountVisible(true);
       })
       .catch((error) => {
         const errorMessage = error.message;

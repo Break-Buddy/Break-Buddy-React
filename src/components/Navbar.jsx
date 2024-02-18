@@ -1,9 +1,13 @@
 import BBLogo from "../assets/BBLogo1.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
+import user2 from "../assets/user2.png";
 
-function Navbar({ handleLogIn, isLoginVisible, handleSignUp }) {
+function Navbar({ handleLogIn, handleSignUp }) {
+  const isUserAuthenticated = auth.currentUser;
+  const navigate = useNavigate();
+
   // Function to log user out
   const handleLogout = (e) => {
     e.preventDefault();
@@ -11,6 +15,7 @@ function Navbar({ handleLogIn, isLoginVisible, handleSignUp }) {
     signOut(auth)
       .then(() => {
         console.log("Sign out successful");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -25,10 +30,17 @@ function Navbar({ handleLogIn, isLoginVisible, handleSignUp }) {
         </Link>
       </div>
 
-      {isLoginVisible ? (
-        <div className="flex gap-5">
-          <div>Sign Up</div>
-          <button onClick={handleLogout}>Logout</button>
+      {isUserAuthenticated ? (
+        <div className="flex gap-9">
+          <button
+            className="text-[#007DE2] cursor-pointer"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+          <div className="w-10">
+            <img src={user2} alt="" />
+          </div>
         </div>
       ) : (
         <div className="flex gap-6 items-center">
