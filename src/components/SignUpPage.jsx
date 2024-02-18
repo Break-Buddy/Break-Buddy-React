@@ -30,6 +30,7 @@ function SignUpPage({
   // For Signing up via email
   const [userCredentials, setUserCredentials] = useState({});
 
+  // Function to show password information in textboxes
   useEffect(() => {
     const handleKeyPress = (event) => {
       const capsLockEnabled =
@@ -50,7 +51,7 @@ function SignUpPage({
     // console.log(userCredentials);
   };
 
-  // Function to sign up using email to Firebase
+  // Function to sign up using email to Firebase, Button
   const handleSignup = (e) => {
     e.preventDefault();
 

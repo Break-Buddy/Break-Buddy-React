@@ -73,6 +73,7 @@ function App() {
             handleCloseModal={handleCloseModal}
             handleCreateAccount={handleCreateAccount}
             setIsSignUpVisible={setIsSignUpVisible}
+            setIsCreateAccountVisible={setIsCreateAccountVisible}
           />
         </div>
       ) : isCreateAccountVisible ? (
