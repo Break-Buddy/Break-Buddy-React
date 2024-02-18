@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CameraIcon from "../assets/CameraIcon.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
   const [firstName, setFirstName] = useState("");
@@ -10,10 +10,33 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
   const [isOver18, setIsOver18] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [bio, setBio] = useState(""); // Added state for bio field
+  const [isInfoFilledout, setIsInfoFilledout] = useState(false);
 
-  const handleStoreInformation = () => {
-    localStorage.setItem("firstName", firstName);
-    setIsCreateAccountVisible(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsInfoFilledout(
+      firstName && lastName && timezone && gender && isOver18 && agreeTerms
+    );
+  }, [firstName, lastName, timezone, gender, isOver18, agreeTerms]);
+
+  // const handleStoreInformation = () => {
+  //   localStorage.setItem("firstName", firstName);
+  //   setIsCreateAccountVisible(false);
+  // };
+
+  // If all fields are filled, enable the button
+  const handleIsAllInfoFilled = (e) => {
+    e.preventDefault();
+
+    if (isInfoFilledout) {
+      setIsCreateAccountVisible(false);
+      localStorage.setItem("firstName", firstName);
+      navigate("/home");
+      console.log("successfully created an account");
+    } else {
+      console.log("button disabled");
+    }
   };
 
   const handleFirstNameChange = (e) => {
@@ -44,22 +67,27 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
     setBio(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you can submit the form data to your backend or perform any other actions
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Timezone:", timezone);
-    console.log("Gender:", gender);
-    console.log("Is Over 18:", isOver18);
-    console.log("Agree Terms:", agreeTerms);
-    console.log("Bio:", bio); // Log the bio field value
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Here you can submit the form data to your backend or perform any other actions
+  //   console.log("First Name:", firstName);
+  //   console.log("Last Name:", lastName);
+  //   console.log("Timezone:", timezone);
+  //   console.log("Gender:", gender);
+  //   console.log("Is Over 18:", isOver18);
+  //   console.log("Agree Terms:", agreeTerms);
+  //   console.log("Bio:", bio); // Log the bio field value
+  // };
 
   return (
     <div className="flex items-center justify-center bg-white border-2 rounded-md w-[527px]">
       <div className="flex flex-col items-center justify-center gap-4 p-4 bg-white rounded-lg">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form
+          onSubmit={(e) => {
+            handleIsAllInfoFilled(e);
+          }}
+          className="flex flex-col gap-4"
+        >
           <div className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full cursor-pointer">
             <img className="w-full" src={CameraIcon} alt="Camera Icon" />
           </div>
@@ -119,7 +147,7 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
               <option value="other">Other</option>
             </select>
           </div>
-            <div className="flex flex-col items-start pt-4">
+          <div className="flex flex-col items-start pt-4">
             <label htmlFor="bio" className="text-black mb-1">
               Bio (optional)
             </label>
@@ -155,11 +183,16 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
               </span>
             </label>
           </div>
-          <Link onClick={handleStoreInformation} to="/home" className="mx-auto">
-            <button type="submit" className="button-3 py-3 px-3 w-40 my-5 ">
-              Create Account
-            </button>
-          </Link>
+          <button
+            type="submit"
+            className={`${
+              isInfoFilledout
+                ? "button-3"
+                : "bg-[#D0D5DD] text-[#64748B] rounded-md font-medium cursor-not-allowed"
+            }  py-3 px-3 w-40 my-5 mx-auto`}
+          >
+            Create Account
+          </button>
         </form>
       </div>
     </div>
@@ -167,4 +200,3 @@ const AccountCreation = ({ handleCloseModal, setIsCreateAccountVisible }) => {
 };
 
 export default AccountCreation;
-
