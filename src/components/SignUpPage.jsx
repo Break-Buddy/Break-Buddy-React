@@ -10,13 +10,12 @@ import {
 } from "./Icons";
 
 import {
-  updateProfile,
   createUserWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
   FacebookAuthProvider,
   OAuthProvider,
-} from "firebase/auth"; // Update import to include OAuthProvider
+} from "firebase/auth";
 import { auth } from "../config/firebase";
 
 function SignUpPage({
@@ -24,13 +23,12 @@ function SignUpPage({
   setIsCreateAccountVisible,
   setIsSignUpVisible,
 }) {
-  // For show password icon
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCapslockOn, setIsCapslockOn] = useState(false);
-  // For Signing up via email
   const [userCredentials, setUserCredentials] = useState({});
+  const [passwordDontMatch, setPasswordDontMatch] = useState(false);
+  const [accountAlreadyExist, setAccountAlreadyExist] = useState(false);
 
-  // Function to show password information in textboxes
   useEffect(() => {
     const handleKeyPress = (event) => {
       const capsLockEnabled =
@@ -45,61 +43,49 @@ function SignUpPage({
     };
   }, []);
 
-  // Function to change input value from signup form
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
-    // console.log(userCredentials);
   };
 
-  // Function to sign up using email to Firebase, Button
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    createUserWithEmailAndPassword(
-      auth,
-      userCredentials.email,
-      userCredentials.password
-    )
-      .then((userCredential) => {
+    if (userCredentials.password === userCredentials.confirmPassword) {
+      setPasswordDontMatch(false);
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          userCredentials.email,
+          userCredentials.password
+        );
+
         const user = userCredential.user;
         console.log(user.displayName);
         setIsSignUpVisible(false);
         setIsCreateAccountVisible(true);
-      })
-      .catch((error) => {
+      } catch (error) {
         const errorMessage = error.message;
         const errorCode = error.code;
-        console.log(errorCode, errorMessage);
-      });
-  };
 
-  const handleGoogleSignUp = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-      console.log("Signed up with Google successfully!");
-    } catch (error) {
-      console.error("Error signing up with Google:", error);
+        if (errorCode === "auth/email-already-in-use") {
+          setAccountAlreadyExist(true);
+        }
+
+        console.error(errorCode, errorMessage);
+      }
+    } else {
+      setPasswordDontMatch(true);
+      console.log("Password did not match");
     }
   };
 
-  const handleFacebookSignUp = async () => {
+  const handleSocialSignUp = async (provider) => {
     try {
-      const provider = new FacebookAuthProvider();
       await signInWithPopup(auth, provider);
-      console.log("Signed up with Facebook successfully!");
+      console.log(`Signed up with ${provider.providerId} successfully!`);
     } catch (error) {
-      console.error("Error signing up with Facebook:", error);
-    }
-  };
-
-  const handleMicrosoftSignUp = async () => {
-    try {
-      const provider = new OAuthProvider("microsoft.com"); // Create OAuthProvider for Microsoft
-      await signInWithPopup(auth, provider); // Sign up with Microsoft pop-up
-      console.log("Signed up with Microsoft successfully!");
-    } catch (error) {
-      console.error("Error signing up with Microsoft:", error);
+      console.error(`Error signing up with ${provider.providerId}:`, error);
     }
   };
 
@@ -112,7 +98,6 @@ function SignUpPage({
         <CloseButton />
       </div>
       <form className="flex flex-col items-center self-center p-11 pb-5 mt-4 max-w-full text-black bg-white rounded-xl w-[527px] max-md:px-5">
-        {/* EMAIL */}
         <div className="flex flex-col w-full">
           <h2 className="text-2xl leading-5 font-medium self-center">
             Sign Up
@@ -121,28 +106,25 @@ function SignUpPage({
             Email
           </label>
           <input
-            onChange={(e) => {
-              handleCredentials(e);
-            }}
+            onChange={(e) => handleCredentials(e)}
             type="email"
             name="email"
-            className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl h-[42px] focus:outline-none max-md:max-w-full bg-[#F2F2F2] focus:bg-[#F2F2F2]"
+            className={`pl-3 shrink-0 self-stretch mt-1.5 rounded-xl h-[42px] focus:outline-none max-md:max-w-full bg-[#F2F2F2] focus:bg-[#F2F2F2] ${
+              accountAlreadyExist && "border border-[#EF4444]"
+            } `}
           />
         </div>
-        {/* END EMAIL */}
-        {/* PASSWORD */}
         <div className="flex flex-col w-full relative">
           <label className="self-stretch mt-9 max-md:max-w-full font-medium">
             Password
           </label>
           <input
             type={isPasswordVisible ? "text" : "password"}
-            onChange={(e) => {
-              handleCredentials(e);
-            }}
+            onChange={(e) => handleCredentials(e)}
             name="password"
-            className="pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
-            aria-label="password-input"
+            className={`pl-3 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none ${
+              passwordDontMatch ? "border border-[#EF4444]" : null
+            }`}
           />
           <div
             onClick={() => setIsPasswordVisible(!isPasswordVisible)}
@@ -161,16 +143,17 @@ function SignUpPage({
             {isCapslockOn && <CapslockOnIcon />}
           </div>
         </div>
-        {/* END PASSWORD */}
-        {/* CONFIRM PASSWORD */}
         <div className="flex flex-col w-full relative">
           <label className="self-stretch mt-9 max-md:max-w-full font-medium">
             Confirm Password
           </label>
           <input
             type={isPasswordVisible ? "text" : "password"}
-            className="pl-3 pr-14 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none"
-            aria-label="password-input"
+            onChange={(e) => handleCredentials(e)}
+            name="confirmPassword"
+            className={`pl-3 pr-14 shrink-0 self-stretch mt-1.5 rounded-xl bg-[#F2F2F2] focus:bg-[#F2F2F2] h-[42px] max-md:max-w-full focus:outline-none ${
+              passwordDontMatch ? "border border-[#EF4444]" : null
+            }`}
           />
           <div
             onClick={() => setIsPasswordVisible(!isPasswordVisible)}
@@ -189,11 +172,16 @@ function SignUpPage({
             {isCapslockOn && <CapslockOnIcon />}
           </div>
         </div>
-        {/* END CONFIRM PASSWORD */}
+        {accountAlreadyExist && (
+          <div className="text-[#EF4444]">That account is already in use</div>
+        )}
+        {passwordDontMatch && (
+          <div className="text-[#EF4444]">
+            Oops! Seems those passwords don’t match
+          </div>
+        )}
         <button
-          onClick={(e) => {
-            handleSignup(e);
-          }}
+          onClick={(e) => handleSignup(e)}
           className="button-1 px-4 py-2 mt-7"
           type="submit"
         >
@@ -202,21 +190,21 @@ function SignUpPage({
         <div className="mt-7">Or</div>
         <div
           className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5 cursor-pointer"
-          onClick={handleGoogleSignUp}
+          onClick={() => handleSocialSignUp(new GoogleAuthProvider())}
         >
           <GoogleIcon />
           <div>Continue with Google</div>
         </div>
         <div
           className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5 cursor-pointer"
-          onClick={handleFacebookSignUp}
+          onClick={() => handleSocialSignUp(new FacebookAuthProvider())}
         >
           <FacebookIcon />
           <div>Sign up with Facebook</div>
         </div>
         <div
           className="flex gap-4 justify-center px-4 py-4 mt-7 max-w-full tracking-tight rounded-full border-2 border-solid border-slate-200 leading-[150%] text-slate-800 w-[280px] max-md:px-5 cursor-pointer"
-          onClick={handleMicrosoftSignUp}
+          onClick={() => handleSocialSignUp(new OAuthProvider("microsoft.com"))}
         >
           <WindowsIcon />
           <div>Sign up with Microsoft</div>
