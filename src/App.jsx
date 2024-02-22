@@ -8,6 +8,7 @@ import SignInPage from "./components/SignInPage";
 import SignUpPage from "./components/SignUpPage";
 import AccountCreation from "./components/AccountCreation";
 import { auth } from "./config/firebase";
+import SignUpPage2 from "./views/SignUpPage2";
 
 function App() {
   const handleLogIn = () => {
@@ -94,6 +95,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Dashboard />} />
+          <Route path="signup" element={<SignUpPage2 />} />
         </Routes>
         <Footer />
       </div>
