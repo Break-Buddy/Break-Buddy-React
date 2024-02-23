@@ -88,7 +88,7 @@ function App() {
       ) : null}
 
       <div
-        className={`scrollbar-thin h-screen overflow-y-scroll scrollbar-none opacity-${
+        className={`h-screen overflow-y-scroll opacity-${
           isLoginVisible || isSignUpVisible || isCreateAccountVisible ? 30 : 100
         }`}
       >

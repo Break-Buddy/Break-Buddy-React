@@ -1,6 +1,5 @@
-import landingImage1 from "../assets/landingImage1.png";
-import landingImage2 from "../assets/landingImage2.png";
 import headerphotoo from "../assets/headerphotoo.svg";
+import { Link } from "react-router-dom";
 
 function LandingDisplay() {
   return (
@@ -19,9 +18,11 @@ function LandingDisplay() {
           <h2 className=" md:w-[420px] text-base md:text-2xl">
             Find an accountability buddy for taking that much needed break
           </h2>
-          <button className="button-1 text-base px-[18px] py-[12px]">
-            Start
-          </button>
+          <Link to="/signup">
+            <button className="button-1 text-base px-[18px] py-[12px]">
+              Start
+            </button>
+          </Link>
         </div>
         {/* END LEFT SIDE */}
         {/* RIGHT SIDE */}
@@ -29,7 +30,6 @@ function LandingDisplay() {
           <img src={headerphotoo} alt="" />
         </div>
         {/* END RIGHT SIDE */}
-        
       </div>
     </div>
   );
