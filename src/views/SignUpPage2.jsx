@@ -11,6 +11,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
+import { Link } from "react-router-dom";
 
 function SignUpPage2() {
   const [userCredentials, setUserCredentials] = useState({});
@@ -78,9 +79,7 @@ function SignUpPage2() {
 
   return (
     <div className="flex justify-center items-center h-screen bg-[#003F71] font-manrope">
-      <form
-        className="flex flex-col items-center px-14 py-8 gap-5 rounded-lg bg-white"
-      >
+      <form className="flex flex-col items-center px-14 py-8 gap-5 rounded-lg bg-white">
         <h2 className="font-medium text-2xl">Sign up</h2>
 
         <div className="flex flex-col gap-3">
@@ -185,9 +184,11 @@ function SignUpPage2() {
 
         <div className="flex gap-1">
           <h3>Already have an account?</h3>
-          <a href="#" className="text-[#007DE2] underline">
-            Sign In
-          </a>
+          <Link to="/login">
+            <a href="#" className="text-[#007DE2] underline">
+              Log in
+            </a>
+          </Link>
         </div>
       </form>
     </div>
