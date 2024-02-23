@@ -161,9 +161,7 @@ function LoginPage() {
           <h3>Don't have an account?</h3>
 
           <Link to="/signup">
-            <a href="#" className="text-[#007DE2] underline">
-              Sign up
-            </a>
+            <h3 className="text-[#007DE2] underline">Sign up</h3>
           </Link>
         </div>
       </form>

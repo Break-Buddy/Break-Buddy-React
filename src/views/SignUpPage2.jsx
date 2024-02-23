@@ -18,7 +18,8 @@ function SignUpPage2() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isCapslockOn, setIsCapslockOn] = useState(false);
   const [passwordDontMatch, setPasswordDontMatch] = useState(false);
-  const [accountAlreadyExist, setAccountAlreadyExist] = useState(false);
+  const [errorSignUp, setErrorSignUp] = useState(false);
+  const [displayErrorMessage, setDisplayErrorMessage] = useState("");
 
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -41,12 +42,14 @@ function SignUpPage2() {
       } catch (error) {
         const errorMessage = error.message;
         const errorCode = error.code;
-
+        setErrorSignUp(true);
         if (errorCode === "auth/email-already-in-use") {
-          setAccountAlreadyExist(true);
+          setDisplayErrorMessage("That account is already in use");
+        } else if (errorCode === "auth/invalid-email") {
+          setDisplayErrorMessage("Invalid email address");
         }
 
-        console.error(errorCode, errorMessage);
+        console.error(errorCode);
       }
     } else {
       setPasswordDontMatch(true);
@@ -91,11 +94,11 @@ function SignUpPage2() {
               name="email"
               type="email"
               className={`pl-4 pr-4 py-1 w-80 h-9 rounded-xl bg-[#F2F2F2] ${
-                accountAlreadyExist && "border border-[#EF4444]"
+                errorSignUp && "border border-[#EF4444]"
               }`}
               onChange={(e) => {
                 handleCredentials(e);
-                setAccountAlreadyExist(false);
+                setErrorSignUp(false);
               }}
             />
           </div>
@@ -153,9 +156,9 @@ function SignUpPage2() {
               {isCapslockOn ? <CapslockOnIcon /> : null}
             </div>
           </div>
-          {accountAlreadyExist && (
+          {errorSignUp && (
             <div className="text-[#EF4444] text-center">
-              That account is already in use
+              {displayErrorMessage}
             </div>
           )}
           {passwordDontMatch && (
@@ -185,9 +188,7 @@ function SignUpPage2() {
         <div className="flex gap-1">
           <h3>Already have an account?</h3>
           <Link to="/login">
-            <a href="#" className="text-[#007DE2] underline">
-              Log in
-            </a>
+            <h3 className="text-[#007DE2] underline">Log in</h3>
           </Link>
         </div>
       </form>
