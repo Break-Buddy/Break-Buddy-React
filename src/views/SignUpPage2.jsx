@@ -11,7 +11,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SignUpPage2() {
   const [userCredentials, setUserCredentials] = useState({});
@@ -20,6 +20,8 @@ function SignUpPage2() {
   const [passwordDontMatch, setPasswordDontMatch] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
   const [displayErrorMessage, setDisplayErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
@@ -39,6 +41,7 @@ function SignUpPage2() {
           userCredentials.password
         );
         console.log(userCredentials.email, userCredentials.password);
+        navigate("/createaccount");
       } catch (error) {
         const errorMessage = error.message;
         const errorCode = error.code;
@@ -61,6 +64,7 @@ function SignUpPage2() {
     try {
       await signInWithPopup(auth, provider);
       console.log(`Signed up with ${provider.providerId} successfully!`);
+      navigate("/home");
     } catch (error) {
       console.error(`Error signing up with ${provider.providerId}:`, error);
     }

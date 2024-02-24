@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import user2 from "../assets/user2.png";
 
-function Navbar({ handleLogIn, handleSignUp }) {
+function Navbar() {
   const isUserAuthenticated = auth.currentUser;
   const navigate = useNavigate();
 
@@ -44,12 +44,12 @@ function Navbar({ handleLogIn, handleSignUp }) {
         </div>
       ) : (
         <div className="flex gap-6 items-center">
-          <h3 onClick={handleLogIn} className="text-[#007DE2] cursor-pointer">
-            Log In
-          </h3>
-          <h3 onClick={handleSignUp} className="button-1 px-4 py-2">
-            Join for Free
-          </h3>
+          <Link to="/login">
+            <h3 className="text-[#007DE2] cursor-pointer">Log In</h3>
+          </Link>
+          <Link to="/signup">
+            <h3 className="button-1 px-4 py-2">Join for Free</h3>
+          </Link>
         </div>
       )}
     </div>
