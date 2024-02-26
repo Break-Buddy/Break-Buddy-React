@@ -125,13 +125,7 @@ function AccountCreation2() {
           <label htmlFor="bio" className="text-black mb-1">
             Bio (optional)
           </label>
-          <input
-            id="bio"
-            type="text"
-            value={bio}
-            onChange={handleBioChange}
-            className="border w-full h-[40px] pl-2 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"
-          />
+          <textarea onChange={handleBioChange} value={bio} name="" id="bio" cols="30" rows="4" className="py-2 border w-full px-3 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"></textarea>
         </div>
         <div className="pl-5">
           <label className="flex items-center">
