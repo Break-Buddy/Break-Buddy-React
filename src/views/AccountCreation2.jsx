@@ -36,8 +36,6 @@ function AccountCreation2() {
     }
   };
 
-
-
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
   };
@@ -62,7 +60,6 @@ function AccountCreation2() {
     setBio(e.target.value);
   };
 
-
   return (
     <div className="flex items-center justify-center rounded-md h-screen w-full bg-[#003F71] font-manrope">
       <form
@@ -71,9 +68,7 @@ function AccountCreation2() {
         }}
         className="flex flex-col gap-4 border px-14 py-3 rounded-lg bg-white"
       >
-        <div
-          className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full border-3 border-black relative cursor-pointer"
-        >
+        <div className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full border-3 border-black relative cursor-pointer">
           <input
             type="file"
             accept="image/*"
@@ -113,19 +108,35 @@ function AccountCreation2() {
           <label htmlFor="timezone" className="text-black mb-1">
             Timezone
           </label>
-          <input
+          <select
             id="timezone"
-            type="text"
             value={timezone}
             onChange={handleTimezoneChange}
             className="border w-full h-[40px] pl-2 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"
-          />
+          >
+            <option value="AKST">Alaska Time - US</option>
+            <option value="AST">Atlantic Time - Canada</option>
+            <option value="CST">Central Time - US & Canada</option>
+            <option value="EST">Eastern Time - US & Canada</option>
+            <option value="HST">Hawaii Time - US</option>
+            <option value="MST">Mountain Time - US & Canada</option>
+            <option value="NST">Newfoundland Time - Canada</option>
+            <option value="PST">Pacific Time - US & Canada </option>
+          </select>
         </div>
         <div className="flex flex-col items-start pt-4">
           <label htmlFor="bio" className="text-black mb-1">
             Bio (optional)
           </label>
-          <textarea onChange={handleBioChange} value={bio} name="" id="bio" cols="30" rows="4" className="py-2 border w-full px-3 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"></textarea>
+          <textarea
+            onChange={handleBioChange}
+            value={bio}
+            name=""
+            id="bio"
+            cols="30"
+            rows="4"
+            className="py-2 border w-full px-3 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"
+          ></textarea>
         </div>
         <div className="pl-5">
           <label className="flex items-center">
