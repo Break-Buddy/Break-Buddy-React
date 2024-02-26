@@ -6,7 +6,6 @@ function AccountCreation2() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [timezone, setTimezone] = useState("");
-  const [gender, setGender] = useState("");
   const [isOver18, setIsOver18] = useState(false);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [bio, setBio] = useState(""); // Added state for bio field
@@ -16,9 +15,9 @@ function AccountCreation2() {
 
   useEffect(() => {
     setIsInfoFilledout(
-      firstName && lastName && timezone && gender && isOver18 && agreeTerms
+      firstName && lastName && timezone && isOver18 && agreeTerms
     );
-  }, [firstName, lastName, timezone, gender, isOver18, agreeTerms]);
+  }, [firstName, lastName, timezone, isOver18, agreeTerms]);
 
   const handleStoreInformation = () => {
     localStorage.setItem("firstName", firstName);
@@ -49,10 +48,6 @@ function AccountCreation2() {
 
   const handleTimezoneChange = (e) => {
     setTimezone(e.target.value);
-  };
-
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
   };
 
   const handleIsOver18Change = (e) => {
@@ -125,22 +120,6 @@ function AccountCreation2() {
             onChange={handleTimezoneChange}
             className="border w-full h-[40px] pl-2 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"
           />
-        </div>
-        <div className="flex flex-col items-start pt-4">
-          <label htmlFor="gender" className="text-black mb-1">
-            Gender
-          </label>
-          <select
-            id="gender"
-            value={gender}
-            onChange={handleGenderChange}
-            className="select-field bg-transparent border rounded-md h-[40px] pl-2 bg-white focus:bg-[#F2F2F2] focus:outline-none pr-2"
-          >
-            <option value="">Select Gender</option>
-            <option value="male">Man</option>
-            <option value="female">Woman</option>
-            <option value="other">Other</option>
-          </select>
         </div>
         <div className="flex flex-col items-start pt-4">
           <label htmlFor="bio" className="text-black mb-1">
