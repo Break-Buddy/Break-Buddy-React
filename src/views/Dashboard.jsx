@@ -4,10 +4,12 @@ import FiltersDashboard from "../components/FiltersDashboard";
 import ActivitiesDashboard from "../components/ActivitiesDashboard";
 import BreakCreation from "../components/BreakCreation";
 import BreakCreationConfirmation from "../components/BreakCreationConfirmation";
+import ShowUserBio from "../components/ShowUserBio";
 
 function Dashboard() {
   const [isPostBreakVisible, setIsPostBreakVisible] = useState(false);
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
+  const [isUserBioVisible, setIsUserBioVisible] = useState(true);
 
   const handlePostBreak = () => {
     setIsPostBreakVisible(true);
@@ -56,6 +58,8 @@ function Dashboard() {
             setIsPostBreakVisible={setIsPostBreakVisible}
             setIsConfirmationVisible={setIsConfirmationVisible}
           />
+        ) : isUserBioVisible ? (
+          <ShowUserBio setIsUserBioVisible={setIsUserBioVisible} />
         ) : null}
       </div>
       <div className="flex flex-col gap-5">
@@ -99,7 +103,7 @@ function Dashboard() {
           </div>
           {/* END OF LEFT */}
           {/* Activities Dashboard */}
-          <ActivitiesDashboard />
+          <ActivitiesDashboard setIsUserBioVisible={setIsUserBioVisible} />
           {/* End of Activities Dashboard */}
         </div>
         {/* END OF BOTTOM STUFF */}
