@@ -3,11 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import user2 from "../assets/user2.png";
+import { useEffect, useState } from "react";
 
-function Navbar({ handleLogIn, handleSignUp }) {
-  const isUserAuthenticated = auth.currentUser;
+function Navbar() {
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const loggedIn = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsUserAuthenticated(true);
+      } else {
+        setIsUserAuthenticated(false);
+      }
+    });
+    console.log(auth.onAuthStateChanged);
+
+    return () => loggedIn();
+  }, []);
   // Function to log user out
   const handleLogout = (e) => {
     e.preventDefault();
@@ -44,12 +57,12 @@ function Navbar({ handleLogIn, handleSignUp }) {
         </div>
       ) : (
         <div className="flex gap-6 items-center">
-          <h3 onClick={handleLogIn} className="text-[#007DE2] cursor-pointer">
-            Log In
-          </h3>
-          <h3 onClick={handleSignUp} className="button-1 px-4 py-2">
-            Join for Free
-          </h3>
+          <Link to="/login">
+            <h3 className="text-[#007DE2] cursor-pointer">Log In</h3>
+          </Link>
+          <Link to="/signup">
+            <h3 className="button-1 px-4 py-2">Join for Free</h3>
+          </Link>
         </div>
       )}
     </div>

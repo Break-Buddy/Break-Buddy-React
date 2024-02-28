@@ -3,6 +3,8 @@ import React, { useState } from "react";
 function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
   const [selectActivity, setSelectActivity] = useState(null);
   const [selectPostPrivacy, setSelectPostPrivacy] = useState(null);
+  const [activityOptionals, setActivityOptionals] = useState("");
+  const [topicOfConversation, setTopicOfConversation] = useState("");
 
   // Function to determine which button is selected
   const handleSelectActivity = (option) => {
@@ -14,9 +16,22 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
     setSelectPostPrivacy(option);
   };
 
+  const handleClosePostbreakModal = () => {
+    setIsPostBreakVisible(false);
+  };
+
   const handleShowPostBreakConfirmation = () => {
     setIsPostBreakVisible(false);
     setIsConfirmationVisible(true);
+  };
+
+  const handleActivityOptionals = (e) => {
+    setActivityOptionals(e);
+    console.log(activityOptionals);
+  };
+
+  const handleTopicOfConversation = (e) => {
+    setTopicOfConversation(e);
   };
 
   return (
@@ -75,16 +90,6 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
           <h3>Activity Type</h3>
           <div className="flex gap-6">
             <button
-              onClick={() => handleSelectActivity("option1")}
-              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
-                selectActivity === "option1"
-                  ? "bg-[#007DE2] text-white"
-                  : "bg-white"
-              }`}
-            >
-              Just Chat
-            </button>
-            <button
               onClick={() => handleSelectActivity("option2")}
               className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
                 selectActivity === "option2"
@@ -111,12 +116,25 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
         <div className="flex flex-col gap-3">
           <h3>Activity (optional but recommended)</h3>
           <input
+            onChange={(e) => handleActivityOptionals(e.target.value)}
+            value={activityOptionals}
             type="text"
             className="rounded px-2 py-[5px] focus:outline-none cursor-pointer border-2 border-[#D6D6D6]"
           />
         </div>
         {/* END THIRD LINE */}
         {/* FOURTH LINE */}
+        <div className="flex flex-col gap-3">
+          <h3>Topic of Conversation (optional)</h3>
+          <input
+            onChange={(e) => handleTopicOfConversation(e.target.value)}
+            value={topicOfConversation}
+            type="text"
+            className="rounded px-2 py-[5px] focus:outline-none cursor-pointer border-2 border-[#D6D6D6]"
+          />
+        </div>
+        {/* END FOURTH LINE */}
+        {/* FIFTH LINE */}
         <div className="flex flex-col gap-3">
           <h3>Post to</h3>
           <div className="flex gap-6">
@@ -152,10 +170,10 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
             </button>
           </div>
         </div>
-        {/* END FOURTH LINE */}
-        {/* FIFTH LINE */}
+        {/* END FIFTH LINE */}
+        {/* SIXTH LINE */}
         <div className="flex gap-7 items-center justify-end">
-          <h3 className="cursor-pointer">Cancel</h3>
+          <h3 className="cursor-pointer" onClick={handleClosePostbreakModal}>Cancel</h3>
           <button
             onClick={handleShowPostBreakConfirmation}
             className="button-3 px-3 py-2 text-sm font-bold"
@@ -163,7 +181,7 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
             POST
           </button>
         </div>
-        {/* END FIFTH LINE */}
+        {/* END SIXTH LINE */}
       </div>
     </div>
   );

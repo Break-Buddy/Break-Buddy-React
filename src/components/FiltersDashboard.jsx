@@ -19,12 +19,8 @@ const joinFilters = [
     value: "public",
   },
   {
-    title: "Private",
-    value: "private",
-  },
-  {
-    title: "Same Gender Only",
-    value: "sameGenderOnly",
+    title: "Friends",
+    value: "friends",
   },
 ];
 
