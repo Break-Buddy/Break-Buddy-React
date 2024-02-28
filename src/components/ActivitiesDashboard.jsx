@@ -81,7 +81,7 @@ function ActivitiesDashboard({ setIsUserBioVisible }) {
             {/* Right Side */}
             <div className="flex items-center gap-4">
               <h3 className="font-semibold">{user.activity}</h3>
-              <button className="button-3 px-4 py-2">JOIN</button>
+              <button className="button-3 px-4 py-2">BOOK</button>
             </div>
             {/* End of Right Side */}
           </div>

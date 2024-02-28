@@ -125,12 +125,15 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
         {/* END THIRD LINE */}
         {/* FOURTH LINE */}
         <div className="flex flex-col gap-3">
-          <h3>Topic of Conversation (optional)</h3>
-          <input
+          <h3>Additional activity information (optional but recommended)</h3>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="3"
+            className="rounded px-2 py-[5px] focus:outline-none cursor-pointer border-2 border-[#D6D6D6]"
             onChange={(e) => handleTopicOfConversation(e.target.value)}
             value={topicOfConversation}
-            type="text"
-            className="rounded px-2 py-[5px] focus:outline-none cursor-pointer border-2 border-[#D6D6D6]"
           />
         </div>
         {/* END FOURTH LINE */}
@@ -173,7 +176,9 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
         {/* END FIFTH LINE */}
         {/* SIXTH LINE */}
         <div className="flex gap-7 items-center justify-end">
-          <h3 className="cursor-pointer" onClick={handleClosePostbreakModal}>Cancel</h3>
+          <h3 className="cursor-pointer" onClick={handleClosePostbreakModal}>
+            Cancel
+          </h3>
           <button
             onClick={handleShowPostBreakConfirmation}
             className="button-3 px-3 py-2 text-sm font-bold"
