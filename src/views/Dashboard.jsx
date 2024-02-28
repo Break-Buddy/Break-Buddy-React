@@ -12,8 +12,8 @@ function Dashboard() {
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
   const [isUserBioVisible, setIsUserBioVisible] = useState(false);
   const [userName, setUserName] = useState(null);
-  const [pageLoaded, setPageLoaded] = useState(false);
-  
+  // const [pageLoaded, setPageLoaded] = useState(false);
+
   useEffect(() => {
     // Listen for changes in authentication state
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -30,15 +30,15 @@ function Dashboard() {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    // Set a timeout to mark the page as loaded after 1 second
-    const timeout = setTimeout(() => {
-      setPageLoaded(true);
-    }, 1000);
+  // useEffect(() => {
+  //   // Set a timeout to mark the page as loaded after 1 second
+  //   const timeout = setTimeout(() => {
+  //     setPageLoaded(true);
+  //   }, 1000);
 
-    // Clean up the timeout when the component is unmounted
-    return () => clearTimeout(timeout);
-  }, []);
+  //   // Clean up the timeout when the component is unmounted
+  //   return () => clearTimeout(timeout);
+  // }, []);
 
   console.log(auth.currentUser);
 
@@ -75,7 +75,7 @@ function Dashboard() {
   const [toggleDate, setToggleDate] = useState(true);
 
   return (
-    <div className={`min-h-screen pt-28 bg-[#003F71] px-9 ${pageLoaded ? "" : "hidden"}`}>
+    <div className={`min-h-screen pt-28 bg-[#003F71] px-9`}>
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center">
         {isPostBreakVisible ? (
           <BreakCreation
@@ -114,7 +114,7 @@ function Dashboard() {
                 {toggleDay}
               </button>
               <button onClick={handlePostBreak} className="button-3 px-6 py-2">
-                + POST A BREAK
+                + CREATE A BREAK
               </button>
             </div>
             {/* End of Buttons */}
