@@ -3,11 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import user2 from "../assets/user2.png";
+import { useEffect, useState } from "react";
 
 function Navbar() {
-  const isUserAuthenticated = auth.currentUser;
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const loggedIn = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsUserAuthenticated(true);
+      } else {
+        setIsUserAuthenticated(false);
+      }
+    });
+    console.log(auth.onAuthStateChanged);
+
+    return () => loggedIn();
+  }, []);
   // Function to log user out
   const handleLogout = (e) => {
     e.preventDefault();

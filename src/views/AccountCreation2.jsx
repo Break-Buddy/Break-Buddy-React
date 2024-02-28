@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import CameraIcon from "../assets/CameraIcon.png";
 import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../config/firebase";
+import friendAvatar2 from "../assets/friendAvatar2.png";
 
 function AccountCreation2() {
   const [firstName, setFirstName] = useState("");
@@ -19,10 +22,6 @@ function AccountCreation2() {
     );
   }, [firstName, lastName, timezone, isOver18, agreeTerms]);
 
-  const handleStoreInformation = () => {
-    localStorage.setItem("firstName", firstName);
-  };
-
   // If all fields are filled, enable the button
   const handleIsAllInfoFilled = (e) => {
     e.preventDefault();
@@ -34,6 +33,17 @@ function AccountCreation2() {
     } else {
       console.log("button disabled");
     }
+
+    updateProfile(auth.currentUser, {
+      displayName: `${firstName} ${lastName}`,
+
+    })
+      .then(() => {
+        console.log(auth.currentUser.displayName);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleFirstNameChange = (e) => {
@@ -60,6 +70,12 @@ function AccountCreation2() {
     setBio(e.target.value);
   };
 
+  let profilePic = document.getElementById("profile-pic");
+  let inputFile = document.getElementById("input-file");
+
+  console.log(auth.currentUser);
+
+
   return (
     <div className="flex items-center justify-center rounded-md h-screen w-full bg-[#003F71] font-manrope">
       <form
@@ -68,13 +84,31 @@ function AccountCreation2() {
         }}
         className="flex flex-col gap-4 border px-14 py-3 rounded-lg bg-white"
       >
-        <div className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full border-3 border-black relative cursor-pointer">
+        <div className="w-20 p-6 bg-[#D0D5DD] mx-auto my-7 h-20 rounded-full border-black relative cursor-pointer">
           <input
+            id="input-file"
             type="file"
-            accept="image/*"
-            className="w-20 h-20 border rounded-full absolute z-10 top-0 left-0 opacity-0"
+            accept="image/png, image/jpeg, image/jpg"
+            className="w-20 h-20 border rounded-full absolute top-0 left-0 hidden"
+            onChange={() => {
+              profilePic.src = URL.createObjectURL(inputFile.files[0]);
+            }}
           />
-          <img className="w-8 absolute" src={CameraIcon} alt="Camera Icon" />
+          <label
+            htmlFor="input-file"
+            className="cursor-pointer absolute top-0 left-0 w-full h-full rounded-full border-black z-10"
+          ></label>
+          <img
+            className="w-8 absolute top-[30%] left-[30%]"
+            src={CameraIcon}
+            alt="Camera Icon"
+          />
+          <img
+            src={friendAvatar2}
+            id="profile-pic"
+            alt=""
+            className="absolute w-full top-0 left-0 rounded-full"
+          />
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex gap-8">
