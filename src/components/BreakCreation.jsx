@@ -5,6 +5,8 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
   const [selectPostPrivacy, setSelectPostPrivacy] = useState(null);
   const [activityOptionals, setActivityOptionals] = useState("");
   const [topicOfConversation, setTopicOfConversation] = useState("");
+  const [isInviteEmailVisible, setIsInviteEmailVisible] = useState(false);
+  const [sendAndPost, setSendAndPost] = useState(false);
 
   // Function to determine which button is selected
   const handleSelectActivity = (option) => {
@@ -32,6 +34,14 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
 
   const handleTopicOfConversation = (e) => {
     setTopicOfConversation(e);
+  };
+
+  const handleEmailReferral = (e) => {
+    if (e.target.value.length > 0) {
+      setSendAndPost(true);
+    } else {
+      setSendAndPost(false);
+    }
   };
 
   return (
@@ -138,40 +148,63 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
         </div>
         {/* END FOURTH LINE */}
         {/* FIFTH LINE */}
-        <div className="flex flex-col gap-3">
-          <h3>Post to</h3>
-          <div className="flex gap-6">
-            <button
-              onClick={() => handleSelectPrivacy("option1")}
-              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
-                selectPostPrivacy === "option1"
-                  ? "bg-[#007DE2] text-white"
-                  : "bg-white"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => handleSelectPrivacy("option2")}
-              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
-                selectPostPrivacy === "option2"
-                  ? "bg-[#007DE2] text-white"
-                  : "bg-white"
-              }`}
-            >
-              Public
-            </button>
-            <button
-              onClick={() => handleSelectPrivacy("option3")}
-              className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
-                selectPostPrivacy === "option3"
-                  ? "bg-[#007DE2] text-white"
-                  : "bg-white"
-              }`}
-            >
-              Private
-            </button>
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-3">
+            <h3>Post to</h3>
+            <div className="flex gap-6">
+              <button
+                onClick={() => {
+                  handleSelectPrivacy("option1");
+                  setIsInviteEmailVisible(false);
+                }}
+                className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                  selectPostPrivacy === "option1"
+                    ? "bg-[#007DE2] text-white"
+                    : "bg-white"
+                }`}
+              >
+                All
+              </button>
+              <button
+                onClick={() => {
+                  handleSelectPrivacy("option2");
+                  setIsInviteEmailVisible(false);
+                }}
+                className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                  selectPostPrivacy === "option2"
+                    ? "bg-[#007DE2] text-white"
+                    : "bg-white"
+                }`}
+              >
+                Public
+              </button>
+              <button
+                onClick={() => {
+                  handleSelectPrivacy("option3");
+                  setIsInviteEmailVisible(true);
+                }}
+                className={`text-[#007DE2] border border-[#007DE2] rounded px-3 py-1 ${
+                  selectPostPrivacy === "option3"
+                    ? "bg-[#007DE2] text-white"
+                    : "bg-white"
+                }`}
+              >
+                Friends
+              </button>
+            </div>
           </div>
+
+          {isInviteEmailVisible ? (
+            <div className="flex flex-col gap-[10px]">
+              <h3>Invite a friend?</h3>
+              <input
+                className="rounded-md px-2 py-[4px] focus:outline-none cursor-pointer border-2 border-[#D6D6D6]"
+                placeholder="email"
+                type="email"
+                onChange={(e) => handleEmailReferral(e)}
+              />
+            </div>
+          ) : null}
         </div>
         {/* END FIFTH LINE */}
         {/* SIXTH LINE */}
@@ -183,7 +216,7 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
             onClick={handleShowPostBreakConfirmation}
             className="button-3 px-3 py-2 text-sm font-bold"
           >
-            POST
+            {sendAndPost ? "SEND AND POST" : "POST"}
           </button>
         </div>
         {/* END SIXTH LINE */}

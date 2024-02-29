@@ -40,7 +40,7 @@ function Dashboard() {
   //   return () => clearTimeout(timeout);
   // }, []);
 
-  console.log(auth.currentUser);
+  console.log(auth.currentUser)
 
   const handlePostBreak = () => {
     setIsPostBreakVisible(true);
