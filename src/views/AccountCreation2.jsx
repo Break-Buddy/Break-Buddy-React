@@ -27,7 +27,6 @@ function AccountCreation2() {
     e.preventDefault();
 
     if (isInfoFilledout) {
-      localStorage.setItem("firstName", firstName);
       navigate("/home");
       console.log("successfully created an account");
     } else {
@@ -36,7 +35,6 @@ function AccountCreation2() {
 
     updateProfile(auth.currentUser, {
       displayName: `${firstName} ${lastName}`,
-
     })
       .then(() => {
         console.log(auth.currentUser.displayName);
@@ -75,7 +73,6 @@ function AccountCreation2() {
 
   console.log(auth.currentUser);
 
-
   return (
     <div className="flex items-center justify-center rounded-md h-screen w-full bg-[#003F71] font-manrope">
       <form
@@ -102,12 +99,6 @@ function AccountCreation2() {
             className="w-8 absolute top-[30%] left-[30%]"
             src={CameraIcon}
             alt="Camera Icon"
-          />
-          <img
-            src={friendAvatar2}
-            id="profile-pic"
-            alt=""
-            className="absolute w-full top-0 left-0 rounded-full"
           />
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between">
@@ -146,8 +137,12 @@ function AccountCreation2() {
             id="timezone"
             value={timezone}
             onChange={handleTimezoneChange}
+            placeholder
             className="border w-full h-[40px] pl-2 rounded-md bg-white focus:bg-[#F2F2F2] focus:outline-none"
           >
+            <option value="" disabled selected>
+              Select...
+            </option>
             <option value="AKST">Alaska Time - US</option>
             <option value="AST">Atlantic Time - Canada</option>
             <option value="CST">Central Time - US & Canada</option>
