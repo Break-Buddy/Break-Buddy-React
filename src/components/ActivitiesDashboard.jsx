@@ -3,6 +3,7 @@ import user1 from "../assets/User1.png";
 import user2 from "../assets/friendAvatar1.png";
 import user3 from "../assets/friendAvatar2.png";
 import user4 from "../assets/friendAvatar3.png";
+import trash from "../assets/delete.png";
 
 const users = [
   {
@@ -39,7 +40,7 @@ const users = [
   },
 ];
 
-function ActivitiesDashboard({ setIsUserBioVisible }) {
+function ActivitiesDashboard({ setIsUserBioVisible, activateFakeActivity }) {
   const [selectedButtons, setSelectedButtons] = useState([]);
 
   const handleJoinedBuddy = (index) => {
@@ -59,7 +60,35 @@ function ActivitiesDashboard({ setIsUserBioVisible }) {
     <div className="w-3/4 bg-white rounded-md px-7 py-7">
       <div className="flex flex-col items-center gap-4">
         <h3 className="font-bold">BREAKS HAPPENING SOON</h3>
-
+        {activateFakeActivity && (
+          <div className="border flex w-full justify-between px-4 py-4 rounded-md bg-[#E5F2FC]">
+            {/* Left Side */}
+            <div className="flex items-start gap-4">
+              <div className="flex flex-col gap-2">
+                <h3>
+                  <span className="font-semibold">You</span> are taking a break
+                  in <span className="font-semibold">13 mins</span>
+                </h3>
+                <div className="flex gap-3">
+                  <h3>
+                    <span className="font-semibold">Duration:</span>
+                    45 mins
+                  </h3>
+                  <h3>
+                    <span className="font-semibold">Time:</span> 1:15-1:45
+                  </h3>
+                </div>
+              </div>
+            </div>
+            {/* End of Left Side */}
+            {/* Right Side */}
+            <div className="flex items-center gap-4">
+              <h3 className="font-semibold">Outdoors - Hike in the Woods</h3>
+              <img src={trash} alt="" className="cursor-pointer" />
+            </div>
+            {/* End of Right Side */}
+          </div>
+        )}
         {/* Card */}
         {users.map((user, i) => (
           <div
@@ -100,12 +129,16 @@ function ActivitiesDashboard({ setIsUserBioVisible }) {
             <div className="flex items-center gap-4">
               <h3 className="font-semibold">{user.activity}</h3>
               <button
-                className={`text-[#0D0F11] rounded-md font-medium px-4 py-2 ${selectedButtons.includes(i) ? "bg-[#DADADA] text-[#7D7D7D]" : "bg-[#F3B734]"}`}
+                className={`text-[#0D0F11] rounded-md font-medium px-4 py-2 ${
+                  selectedButtons.includes(i)
+                    ? "bg-[#DADADA] text-[#7D7D7D]"
+                    : "bg-[#F3B734]"
+                }`}
                 onClick={() => {
                   handleJoinedBuddy(i);
                 }}
               >
-                {selectedButtons.includes(i) ? "JOINED" : "JOIN"}
+                {selectedButtons.includes(i) ? "BOOKED" : "BOOK"}
               </button>
             </div>
             {/* End of Right Side */}

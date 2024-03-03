@@ -13,6 +13,11 @@ function Dashboard() {
   const [isUserBioVisible, setIsUserBioVisible] = useState(false);
   const [userName, setUserName] = useState(null);
   // const [pageLoaded, setPageLoaded] = useState(false);
+  const [activateFakeActivity, setActivateFakeActivity] = useState(false);
+
+  // for break creation
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
   useEffect(() => {
     // Listen for changes in authentication state
@@ -40,7 +45,7 @@ function Dashboard() {
   //   return () => clearTimeout(timeout);
   // }, []);
 
-  console.log(auth.currentUser)
+  console.log(auth.currentUser);
 
   const handlePostBreak = () => {
     setIsPostBreakVisible(true);
@@ -81,6 +86,7 @@ function Dashboard() {
           <BreakCreation
             setIsPostBreakVisible={setIsPostBreakVisible}
             setIsConfirmationVisible={setIsConfirmationVisible}
+            setActivateFakeActivity={setActivateFakeActivity}
           />
         ) : isConfirmationVisible ? (
           <BreakCreationConfirmation
@@ -127,12 +133,15 @@ function Dashboard() {
         <div className="flex gap-8">
           {/* LEFT */}
           <div className="w-1/4 flex flex-col gap-4">
-            <Upcoming />
+            <Upcoming activateFakeActivity={activateFakeActivity} />
             <FiltersDashboard />
           </div>
           {/* END OF LEFT */}
           {/* Activities Dashboard */}
-          <ActivitiesDashboard setIsUserBioVisible={setIsUserBioVisible} />
+          <ActivitiesDashboard
+            setIsUserBioVisible={setIsUserBioVisible}
+            activateFakeActivity={activateFakeActivity}
+          />
           {/* End of Activities Dashboard */}
         </div>
         {/* END OF BOTTOM STUFF */}

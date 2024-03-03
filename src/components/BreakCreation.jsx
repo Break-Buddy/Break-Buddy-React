@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
+function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible, setActivateFakeActivity }) {
   const [selectActivity, setSelectActivity] = useState(null);
   const [selectPostPrivacy, setSelectPostPrivacy] = useState(null);
   const [activityOptionals, setActivityOptionals] = useState("");
@@ -25,6 +25,7 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
   const handleShowPostBreakConfirmation = () => {
     setIsPostBreakVisible(false);
     setIsConfirmationVisible(true);
+    setActivateFakeActivity(true);
   };
 
   const handleActivityOptionals = (e) => {
@@ -73,6 +74,42 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
               <option value="0215">2:15 am</option>
               <option value="0230">2:30 am</option>
               <option value="0245">2:45 am</option>
+              <option value="0300">3:00 am</option>
+              <option value="0315">3:15 am</option>
+              <option value="0330">3:30 am</option>
+              <option value="0345">3:45 am</option>
+              <option value="0400">4:00 am</option>
+              <option value="0415">4:15 am</option>
+              <option value="0430">4:30 am</option>
+              <option value="0445">4:45 am</option>
+              <option value="0500">5:00 am</option>
+              <option value="0515">5:15 am</option>
+              <option value="0530">5:30 am</option>
+              <option value="0545">5:45 am</option>
+              <option value="0600">6:00 am</option>
+              <option value="0615">6:15 am</option>
+              <option value="0630">6:30 am</option>
+              <option value="0645">6:45 am</option>
+              <option value="0700">7:00 am</option>
+              <option value="0715">7:15 am</option>
+              <option value="0730">7:30 am</option>
+              <option value="0745">7:45 am</option>
+              <option value="0800">8:00 am</option>
+              <option value="0815">8:15 am</option>
+              <option value="0830">8:30 am</option>
+              <option value="0845">8:45 am</option>
+              <option value="0900">9:00 am</option>
+              <option value="0915">9:15 am</option>
+              <option value="0930">9:30 am</option>
+              <option value="0945">9:45 am</option>
+              <option value="1000">10:00 am</option>
+              <option value="1015">10:15 am</option>
+              <option value="1030">10:30 am</option>
+              <option value="1045">10:45 am</option>
+              <option value="1100">11:00 am</option>
+              <option value="1115">11:15 am</option>
+              <option value="1130">11:30 am</option>
+              <option value="1145">11:45 am</option>
             </select>
           </div>
           <div className="flex flex-col gap-3">
@@ -91,6 +128,42 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible }) {
               <option value="0215">2:15 am</option>
               <option value="0230">2:30 am</option>
               <option value="0245">2:45 am</option>
+              <option value="0300">3:00 am</option>
+              <option value="0315">3:15 am</option>
+              <option value="0330">3:30 am</option>
+              <option value="0345">3:45 am</option>
+              <option value="0400">4:00 am</option>
+              <option value="0415">4:15 am</option>
+              <option value="0430">4:30 am</option>
+              <option value="0445">4:45 am</option>
+              <option value="0500">5:00 am</option>
+              <option value="0515">5:15 am</option>
+              <option value="0530">5:30 am</option>
+              <option value="0545">5:45 am</option>
+              <option value="0600">6:00 am</option>
+              <option value="0615">6:15 am</option>
+              <option value="0630">6:30 am</option>
+              <option value="0645">6:45 am</option>
+              <option value="0700">7:00 am</option>
+              <option value="0715">7:15 am</option>
+              <option value="0730">7:30 am</option>
+              <option value="0745">7:45 am</option>
+              <option value="0800">8:00 am</option>
+              <option value="0815">8:15 am</option>
+              <option value="0830">8:30 am</option>
+              <option value="0845">8:45 am</option>
+              <option value="0900">9:00 am</option>
+              <option value="0915">9:15 am</option>
+              <option value="0930">9:30 am</option>
+              <option value="0945">9:45 am</option>
+              <option value="1000">10:00 am</option>
+              <option value="1015">10:15 am</option>
+              <option value="1030">10:30 am</option>
+              <option value="1045">10:45 am</option>
+              <option value="1100">11:00 am</option>
+              <option value="1115">11:15 am</option>
+              <option value="1130">11:30 am</option>
+              <option value="1145">11:45 am</option>
             </select>
           </div>
         </div>
