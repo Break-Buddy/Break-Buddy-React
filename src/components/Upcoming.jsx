@@ -18,9 +18,8 @@ function Upcoming({ activateFakeActivity }) {
               <span className="font-semibold">hiking in the woods</span>
             </h3>
             <a
-              className="flex gap-2 w-fit h-fit bg-[#85E0A3] px-2 py-2 rounded-lg cursor-pointer"
               href="https://www.videosdk.live/prebuilt/demo"
-            >
+              className="flex gap-2 w-fit h-fit bg-[#85E0A3] px-2 py-2 rounded-lg cursor-pointer">
               <img className="w-fit h-fit" src={videoChat} alt="" />
               <h3 className="font-semibold">Join</h3>
             </a>

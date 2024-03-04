@@ -1,12 +1,41 @@
 import React, { useState } from "react";
 
-function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible, setActivateFakeActivity }) {
+function BreakCreation({
+  setIsConfirmationVisible,
+  setIsPostBreakVisible,
+  setActivateFakeActivity,
+}) {
   const [selectActivity, setSelectActivity] = useState(null);
   const [selectPostPrivacy, setSelectPostPrivacy] = useState(null);
   const [activityOptionals, setActivityOptionals] = useState("");
   const [topicOfConversation, setTopicOfConversation] = useState("");
   const [isInviteEmailVisible, setIsInviteEmailVisible] = useState(false);
   const [sendAndPost, setSendAndPost] = useState(false);
+
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 1; hour <= 23; hour++) {
+      for (let minute = 0; minute <= 45; minute += 15) {
+        const formattedHour = hour.toString().padStart(2, "0");
+        const formattedMinute = minute.toString().padStart(2, "0");
+        const time = formatTimeAMPM(formattedHour, formattedMinute);
+        const optionValue = `${formattedHour}${formattedMinute}`;
+
+        options.push(
+          <option key={optionValue} value={optionValue}>
+            {time}
+          </option>
+        );
+      }
+    }
+    return options;
+  };
+
+  const formatTimeAMPM = (hour, minute) => {
+    const hour12 = hour % 12 || 12;
+    const period = hour < 12 ? "am" : "pm";
+    return `${hour12}:${minute} ${period}`;
+  };
 
   // Function to determine which button is selected
   const handleSelectActivity = (option) => {
@@ -66,104 +95,18 @@ function BreakCreation({ setIsConfirmationVisible, setIsPostBreakVisible, setAct
               className="rounded px-2 py-[5px] focus:outline-none cursor-pointer border-2 border-[#D6D6D6]"
             >
               <option value=""></option>
-              <option value="0100">1:00 am</option>
-              <option value="0115">1:15 am</option>
-              <option value="0130">1:30 am</option>
-              <option value="0145">1:45 am</option>
-              <option value="0200">2:00 am</option>
-              <option value="0215">2:15 am</option>
-              <option value="0230">2:30 am</option>
-              <option value="0245">2:45 am</option>
-              <option value="0300">3:00 am</option>
-              <option value="0315">3:15 am</option>
-              <option value="0330">3:30 am</option>
-              <option value="0345">3:45 am</option>
-              <option value="0400">4:00 am</option>
-              <option value="0415">4:15 am</option>
-              <option value="0430">4:30 am</option>
-              <option value="0445">4:45 am</option>
-              <option value="0500">5:00 am</option>
-              <option value="0515">5:15 am</option>
-              <option value="0530">5:30 am</option>
-              <option value="0545">5:45 am</option>
-              <option value="0600">6:00 am</option>
-              <option value="0615">6:15 am</option>
-              <option value="0630">6:30 am</option>
-              <option value="0645">6:45 am</option>
-              <option value="0700">7:00 am</option>
-              <option value="0715">7:15 am</option>
-              <option value="0730">7:30 am</option>
-              <option value="0745">7:45 am</option>
-              <option value="0800">8:00 am</option>
-              <option value="0815">8:15 am</option>
-              <option value="0830">8:30 am</option>
-              <option value="0845">8:45 am</option>
-              <option value="0900">9:00 am</option>
-              <option value="0915">9:15 am</option>
-              <option value="0930">9:30 am</option>
-              <option value="0945">9:45 am</option>
-              <option value="1000">10:00 am</option>
-              <option value="1015">10:15 am</option>
-              <option value="1030">10:30 am</option>
-              <option value="1045">10:45 am</option>
-              <option value="1100">11:00 am</option>
-              <option value="1115">11:15 am</option>
-              <option value="1130">11:30 am</option>
-              <option value="1145">11:45 am</option>
+              {generateTimeOptions()}
             </select>
           </div>
           <div className="flex flex-col gap-3">
             <h3>End Time</h3>
             <select
-              name="startTime"
+              name="endTime"
               id=""
               className="rounded px-2 py-[5px] focus:outline-none cursor-pointer border-2 border-[#D6D6D6]"
             >
               <option value=""></option>
-              <option value="0100">1:00 am</option>
-              <option value="0115">1:15 am</option>
-              <option value="0130">1:30 am</option>
-              <option value="0145">1:45 am</option>
-              <option value="0200">2:00 am</option>
-              <option value="0215">2:15 am</option>
-              <option value="0230">2:30 am</option>
-              <option value="0245">2:45 am</option>
-              <option value="0300">3:00 am</option>
-              <option value="0315">3:15 am</option>
-              <option value="0330">3:30 am</option>
-              <option value="0345">3:45 am</option>
-              <option value="0400">4:00 am</option>
-              <option value="0415">4:15 am</option>
-              <option value="0430">4:30 am</option>
-              <option value="0445">4:45 am</option>
-              <option value="0500">5:00 am</option>
-              <option value="0515">5:15 am</option>
-              <option value="0530">5:30 am</option>
-              <option value="0545">5:45 am</option>
-              <option value="0600">6:00 am</option>
-              <option value="0615">6:15 am</option>
-              <option value="0630">6:30 am</option>
-              <option value="0645">6:45 am</option>
-              <option value="0700">7:00 am</option>
-              <option value="0715">7:15 am</option>
-              <option value="0730">7:30 am</option>
-              <option value="0745">7:45 am</option>
-              <option value="0800">8:00 am</option>
-              <option value="0815">8:15 am</option>
-              <option value="0830">8:30 am</option>
-              <option value="0845">8:45 am</option>
-              <option value="0900">9:00 am</option>
-              <option value="0915">9:15 am</option>
-              <option value="0930">9:30 am</option>
-              <option value="0945">9:45 am</option>
-              <option value="1000">10:00 am</option>
-              <option value="1015">10:15 am</option>
-              <option value="1030">10:30 am</option>
-              <option value="1045">10:45 am</option>
-              <option value="1100">11:00 am</option>
-              <option value="1115">11:15 am</option>
-              <option value="1130">11:30 am</option>
-              <option value="1145">11:45 am</option>
+              {generateTimeOptions()}
             </select>
           </div>
         </div>
